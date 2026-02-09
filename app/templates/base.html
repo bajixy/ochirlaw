@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Ochir Law{% endblock %}{% block title_suffix %}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Strategic legal advice for individuals, families and businesses — Brisbane & Mongolia connected.{% endblock %}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+
+  <style>
+    /* ===== Global Background ===== */
+    html, body {
+      background-color: #ededed !important;
+    }
+
+    /* Ensure main content fills page nicely */
+    .page-content {
+      background-color: transparent;
+      min-height: 70vh;
+    }
+
+    /* ===== Premium Navbar Styling ===== */
+    .navbar {
+      background: #092742 !important;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.25s ease;
+    }
+
+    .navbar .nav-link {
+      font-weight: 500;
+      color: #ffffff !important;
+      margin-left: 1rem;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .navbar .nav-link:hover {
+      color: #cfe6ff !important;
+    }
+
+    /* subtle underline hover effect */
+    .navbar .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.25s ease;
+    }
+
+    .navbar .nav-link:hover::after,
+    .navbar .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Logo sizing */
+    .logo-img {
+      height: 48px;
+      width: auto;
+    }
+
+    /* Phone number styling */
+    .nav-phone {
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+
+    .nav-phone:hover {
+      background: #ffffff;
+      color: #092742;
+      border-color: #ffffff;
+    }
+  </style>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+
+
+<!-- ===== Intro Loader ===== -->
+<div id="intro-loader" class="intro-loader" aria-hidden="true">
+  <div class="intro-inner">
+    <img
+      src="{{ url_for('static', filename='images/OchirLaw_Logo_Main_Brown.png') }}"
+      alt="Ochir Law"
+      class="intro-logo"
+    />
+    <div class="intro-line"></div>
+    <div class="intro-sub">Strategic Legal Advice</div>
+  </div>
+</div>
+<noscript>
+  <style>
+    #intro-loader { display: none !important; }
+  </style>
+</noscript>
+
+ <!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" aria-label="Primary">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+      <img 
+        src="{{ url_for('static', filename='images/OchirLaw_Logo_Vertical_Navy.png') }}" 
+        alt="Ochir Law"
+        class="me-2 logo-img"
+      >
+    </a>
+    
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %} href="{{ url_for('main.about') }}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.practice_areas' %}active{% endif %}" {% if request.endpoint == 'main.practice_areas' %}aria-current="page"{% endif %} href="{{ url_for('main.practice_areas') }}">Practice Areas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" {% if request.endpoint == 'main.contact' %}aria-current="page"{% endif %} href="{{ url_for('main.contact') }}">
+            Book Consultation
+          </a>
+        </li>
+      </ul>
+
+      <!-- Phone (visible on all screens) -->
+      <div class="d-flex align-items-center ms-lg-4 mt-3 mt-lg-0">
+        <a href="tel:+61400123456" class="nav-phone" aria-label="Call Ochir Law">
+          +61 0456 867 879
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+  <!-- ===== Main Content ===== -->
+  <main id="main-content" class="page-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ===== Footer ===== -->
+<footer class="py-5 mt-5 border-top">
+  <div class="container text-center">
+    <p class="text-secondary small mb-1">
+      &copy; {{ current_year if current_year is defined else 2025 }} Ochir Law
+    </p>
+
+    <p class="text-secondary small mb-1">
+      Professional Legal Counsel &middot; Family, Estate, Employment & Civil Law
+    </p>
+
+    <!-- Terms link -->
+    <p class="small mb-0">
+      <a href="{{ url_for('main.terms') }}" class="text-secondary text-decoration-none">
+        Terms & Conditions
+      </a>
+    </p>
+  </div>
+</footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Intro Loader Script -->
+<script>
+  (function () {
+    const loader = document.getElementById("intro-loader");
+    if (!loader) return;
+
+    const seen = sessionStorage.getItem("ochir_intro_seen");
+    if (seen === "1") {
+      loader.classList.add("is-hidden");
+      return;
+    }
+
+    // Minimum display time for premium feel
+    const MIN_TIME = 900;
+    const start = performance.now();
+
+    window.addEventListener("load", () => {
+      const elapsed = performance.now() - start;
+      const remaining = Math.max(0, MIN_TIME - elapsed);
+
+      setTimeout(() => {
+        loader.classList.add("is-hidden");
+        sessionStorage.setItem("ochir_intro_seen", "1");
+      }, remaining);
+    });
+  })();
+</script>
+<script>
+  (function () {
+    const items = document.querySelectorAll(".fade-up");
+    if (!items.length) return;
+
+    // Reduced motion: show everything immediately
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) {
+      items.forEach(el => el.classList.add("is-visible"));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+
+</body>
+</html>

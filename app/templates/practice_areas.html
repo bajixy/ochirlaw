@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Practice Areas – Ochir Law{% endblock %}
+
+{% block content %}
+
+<!-- ===== Page Header ===== -->
+<section class="page-header text-center py-5">
+  <div class="container">
+    <h1 class="fw-semibold">Practice Areas</h1>
+    <p class="text-secondary mt-2" style="max-width:700px;margin:0 auto;">
+      Strategic, practical legal support across personal and business matters. 
+      Clear advice. Strong representation. Efficient outcomes.
+    </p>
+  </div>
+</section>
+
+
+<!-- ===== Practice Areas Grid ===== -->
+<section class="pb-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Family Law -->
+      <div class="col-md-4">
+        <div class="luxury-card h-100 p-4">
+          <h4 class="mb-3" style="color:#bc9167;">Family Law</h4>
+          <p style="color:#bc9167;">
+            Practical and strategic guidance through complex family matters 
+            with a focus on clarity, fairness, and resolution.
+          </p>
+          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
+            <li>Divorce & separation</li>
+            <li>Parenting arrangements</li>
+            <li>Property settlements</li>
+            <li>Binding financial agreements</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Estate & Wills -->
+      <div class="col-md-4">
+        <div class="luxury-card h-100 p-4">
+          <h4 class="mb-3" style="color:#bc9167;">Wills & Estates</h4>
+          <p style="color:#bc9167;">
+            Protect your assets and ensure your wishes are carried out with 
+            carefully structured estate planning.
+          </p>
+          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
+            <li>Wills & testament drafting</li>
+            <li>Estate planning</li>
+            <li>Probate applications</li>
+            <li>Estate disputes</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Employment & Civil -->
+      <div class="col-md-4">
+        <div class="luxury-card h-100 p-4">
+          <h4 class="mb-3" style="color:#bc9167;">Employment & Civil</h4>
+          <p style="color:#bc9167;">
+            Strong, practical legal support for workplace and civil matters 
+            with a focus on efficient resolution.
+          </p>
+          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
+            <li>Employment disputes</li>
+            <li>Contract review</li>
+            <li>Civil claims</li>
+            <li>Negotiation & representation</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== CTA Section ===== -->
+<section class="cta-section py-5 text-center">
+  <div class="container">
+    <h2 class="fw-semibold">Need legal guidance?</h2>
+    <p class="text-secondary mt-2 mb-4">
+      Book a confidential consultation to discuss your situation and next steps.
+    </p>
+
+    <a href="{{ url_for('main.contact') }}" class="cta-btn">
+      Book Consultation
+    </a>
+  </div>
+</section>
+
+{% endblock %}

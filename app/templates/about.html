@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}About – Ochir Law{% endblock %}
+
+{% block content %}
+<!-- Page Header / Hero -->
+<section class="page-header py-5">
+  <div class="container px-3 px-sm-4">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-8">
+        <h1>Clear legal advice. Calm, strategic support.</h1>
+        <p class="lead mb-3">
+          We help individuals and businesses navigate family, estate, employment,
+          and civil matters with practical guidance, discreet communication, and
+          thoughtful strategy.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{{ url_for('main.contact') }}" class="cta-btn">Book a Consultation</a>
+          <a href="{{ url_for('main.practice_areas') }}" class="cta-btn" style="background: transparent; border: 1px solid currentColor;">
+            View Practice Areas
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="luxury-card">
+          <h2 class="h5 mb-2">What to expect</h2>
+          <ul class="about-list mb-0">
+            <li>Plain-English advice and next steps</li>
+            <li>Options explained with costs and timeframes</li>
+            <li>Confidential, respectful communication</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>3
+</section>
+
+<!-- Main Content -->
+<section class="container my-4 my-lg-5 px-3 px-sm-4">
+  <div class="row g-5 align-items-start">
+
+    <!-- About Text -->
+    <div class="col-lg-7">
+      <div class="luxury-card">
+        <h2>Our Approach</h2>
+        <p>
+          Ochir Law is a boutique corporate and commercial firm founded by a Mongolian‑born, Australian‑qualified lawyer. We provide strategic legal guidance to businesses operating across corporate, commercial, funds, and financial services sectors. Our approach blends cultural insight with technical precision, helping clients navigate complex regulatory environments with clarity and confidence. Built on professionalism, integrity, and a commitment to practical outcomes, we support growing companies, investors, and entrepreneurs with legal solutions that are clear, commercial, and aligned with their long‑term goals.
+
+        </p>
+        <p>
+          Whether you need guidance through a complex dispute or support with
+          planning and documentation, our role is to protect your interests with
+          professionalism and care.
+        </p>
+
+        <hr class="my-4" />
+
+        <h3 class="mt-0">How We Work</h3>
+        <ol class="about-list">
+          <li><strong>Listen first:</strong> We clarify your goals and the key facts.</li>
+          <li><strong>Map options:</strong> We explain pathways, risks, and likely outcomes.</li>
+          <li><strong>Take action:</strong> We progress your matter efficiently and keep you informed.</li>
+        </ol>
+
+        <h3 class="mt-4">What We Value</h3>
+        <ul class="about-list">
+          <li><strong>Clarity:</strong> Straightforward advice with no confusion.</li>
+          <li><strong>Strategy:</strong> Thoughtful planning for the best result.</li>
+          <li><strong>Integrity:</strong> Honest representation you can trust.</li>
+          <li><strong>Care:</strong> Respectful service during important moments.</li>
+        </ul>
+      </div>
+
+      <div class="luxury-card mt-4">
+        <h2>Who We Help</h2>
+        <p class="mb-3">
+          We work with clients who want decisive advice, sensible solutions, and a
+          steady hand—especially when the situation feels urgent or emotionally
+          charged.
+        </p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="luxury-card" style="height: 100%;">
+              <h3 class="h5 mb-2">Individuals & Families</h3>
+              <p class="mb-0">Support with relationships, estates, employment concerns, and disputes.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="luxury-card" style="height: 100%;">
+              <h3 class="h5 mb-2">Small Businesses</h3>
+              <p class="mb-0">Practical guidance for workplace issues, agreements, and conflict resolution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-5">
+      <div class="luxury-card">
+        <h2>Practice Focus</h2>
+        <p>
+          We assist individuals and businesses with matters including:
+        </p>
+        <ul class="about-list">
+          <li>Family and relationship law</li>
+          <li>Wills and estate planning</li>
+          <li>Employment and workplace advice</li>
+          <li>Civil disputes and negotiation</li>
+        </ul>
+
+        <hr class="my-4" />
+
+        <h3 class="h5 mb-2">Prefer a quick start?</h3>
+        <p class="mb-3">
+          Send a short overview of your matter and we’ll advise next steps.
+        </p>
+        <a href="{{ url_for('main.contact') }}" class="cta-btn mt-1">
+          Contact Us
+        </a>
+      </div>
+
+      <div class="luxury-card mt-4">
+        <h2>Commitment to Confidentiality</h2>
+        <p class="mb-0">
+          Your matter is treated with discretion. We keep communication clear,
+          secure, and respectful at every stage.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Premium CTA -->
+<section class="cta-section py-5" style="margin-top: 2rem;">
+  <div class="container px-3 px-sm-4 d-flex justify-content-center">
+    <div style="max-width: 680px; width: 100%; text-align: center;">
+      <!-- subtle divider -->
+      <div style="width: 60px; height: 2px; background: #bc9167; margin: 0 auto 1.8rem auto; opacity: .6;"></div>
+
+      <h2 style="letter-spacing: -0.02em; font-weight: 500;">
+        Ready to move forward?
+      </h2>
+
+      <p class="mb-4" style="color: #555; font-size: 1.05rem;">
+        Discuss your matter confidentially and receive clear, strategic next steps.
+      </p>
+
+      <div class="d-flex justify-content-center">
+        <a href="{{ url_for('main.contact') }}" class="cta-btn" style="min-width: 220px;">
+          Book Consultation
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

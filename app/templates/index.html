@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block title %}Ochir Law – Brisbane Legal Services | Strategic Legal Advice{% endblock %}
+{% block meta_description %}
+  {% set meta_desc = "Ochir Law provides clear, strategic legal services in Brisbane, QLD. Get practical advice across corporate & commercial, wills & estates, employment and civil matters." %}
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero hero-pattern">
+  <div class="hero-inner container text-center">
+
+    <h1 class="fade-up fade-delay-1">
+      Where cultural insight meets Australian legal excellence.
+    </h1>
+
+    <p class="fade-up fade-delay-2">
+      Specialising in corporate, commercial, funds, and financial services regulation for businesses that demand clarity, strategy, and results. Based in <strong>Brisbane</strong>, with strong
+      cross-border understanding for <strong>Mongolia</strong>-connected matters.
+    </p>
+
+    <div class="row g-3 justify-content-center mt-4 fade-up fade-delay-2">
+      <div class="col-12 col-md-3">
+        <div class="step-card h-100">
+          <h3 class="mb-1">Responsive</h3>
+          <p class="mb-0">Clear next steps and prompt communication.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="step-card h-100">
+          <h3 class="mb-1">Practical</h3>
+          <p class="mb-0">Advice designed to reduce stress and risk.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="step-card h-100">
+          <h3 class="mb-1">Strategic</h3>
+          <p class="mb-0">Focused on outcomes, not busywork.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Signals -->
+    <div class="hero-trust fade-up fade-delay-3">
+      <span>✔ Clear guidance</span>
+      <span>✔ Prompt communication</span>
+      <span>✔ Strategic outcomes</span>
+    </div>
+
+    <!-- Primary CTA (single) -->
+    <div class="hero-actions fade-up fade-delay-3">
+      <a href="mailto:m.saruul@ochirlaw.com.au" class="cta-btn">
+        Book a Consultation
+      </a>
+
+      <div class="mt-3">
+        <a href="mailto:m.saruul@ochirlaw.com.au" class="hero-link d-block" aria-label="Email enquiry">
+          Email: m.saruul@ochirlaw.com.au
+        </a>
+        <a href="tel:0456867879" class="hero-link d-block" aria-label="Call phone">
+          Call: 0456 867 879
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Practice Areas -->
+<section class="my-5">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <h2 class="section-title fade-up">Practice Areas</h2>
+      <p class="section-sub fade-up fade-delay-1">
+        Tailored support with a clear plan from day one.
+      </p>
+    </div>
+
+    <div class="row text-center g-4">
+
+      <div class="col-md-6 col-lg-3">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#corporate">
+          <div class="luxury-card fade-up fade-delay-1">
+            <h3>Corporate</h3>
+            <p>
+              Corporate advisory and transactions including incorporations, governance,
+              restructures, shareholder arrangements, and strategic business changes.
+              Clear guidance across the full corporate lifecycle.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#commercial">
+          <div class="luxury-card fade-up fade-delay-2">
+            <h3>Commercial</h3>
+            <p>
+              Review and drafting of commercial agreements with practical, risk-aware
+              structuring. From supplier and service contracts to tailored terms and
+              negotiation-ready documentation.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#fsr">
+          <div class="luxury-card fade-up fade-delay-3">
+            <h3>Financial Services Regulation</h3>
+            <p>
+              Structuring, licensing, and regulatory guidance for financial services
+              businesses. Navigate compliance, regulatory obligations, and strategic
+              setup with confidence.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#funds">
+          <div class="luxury-card fade-up fade-delay-4">
+            <h3>Funds</h3>
+            <p>
+              Fund structuring, transactions, and ongoing regulatory support.
+              Assistance across formation, investor arrangements, and evolving
+              compliance requirements.
+            </p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works my-5">
+  <div class="container text-center">
+
+    <h2 class="section-title fade-up">How It Works</h2>
+    <p class="section-sub fade-up fade-delay-1">
+      A straightforward approach that keeps you informed at every step.
+    </p>
+
+    <div class="row g-4 mt-4">
+
+      <div class="col-md-4">
+        <div class="step-card fade-up fade-delay-1">
+          <h3>1. Enquire</h3>
+          <p>Contact us with your legal question or situation.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step-card fade-up fade-delay-2">
+          <h3>2. Consult</h3>
+          <p>We provide clear options and practical next steps.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step-card fade-up fade-delay-3">
+          <h3>3. Resolve</h3>
+          <p>Strategic action focused on the best possible outcome.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
