@@ -22,9 +22,30 @@ def terms():
     return render_template("terms.html")
 
 
+# Privacy Policy page
+@main.route("/privacy")
+def privacy():
+    # Privacy Policy page
+    return render_template("privacy.html")
+
+# Optional alias (common URL)
+@main.route("/privacy-policy")
+def privacy_policy():
+    return redirect(url_for("main.privacy"))
+
+# Optional alias for Terms (common URL)
+@main.route("/terms-and-conditions")
+def terms_and_conditions():
+    return redirect(url_for("main.terms"))
+
+
 @main.route("/about")
 def about():
     return render_template("about.html")
+
+@main.route("/team")
+def team():
+    return render_template("team.html")
 
 
 @main.route("/practice-areas")  # this must render its own template

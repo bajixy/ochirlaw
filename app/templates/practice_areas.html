@@ -3,70 +3,198 @@
 
 {% block content %}
 
-<!-- ===== Page Header ===== -->
-<section class="page-header text-center py-5">
-  <div class="container">
-    <h1 class="fw-semibold">Practice Areas</h1>
-    <p class="text-secondary mt-2" style="max-width:700px;margin:0 auto;">
-      Strategic, practical legal support across personal and business matters. 
-      Clear advice. Strong representation. Efficient outcomes.
+<style>
+  /* Practice Areas – page-scoped styling */
+  .pa-hero {
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+  .pa-hero h1 {
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    font-size: clamp(2.2rem, 3.8vw, 3.2rem);
+    margin: 0;
+    color: #062841;
+  }
+  .pa-hero .lead {
+    max-width: 70ch;
+    margin: 1rem auto 0;
+    color: rgba(6, 40, 65, 0.78);
+    line-height: 1.85;
+    font-size: 1.05rem;
+  }
+  .pa-hero .divider {
+    width: 72px;
+    height: 3px;
+    margin: 16px auto 0;
+    background: #bc9167;
+    border-radius: 2px;
+  }
+
+  .pa-grid {
+    padding: 0 0 3.5rem;
+  }
+
+  .pa-card {
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+    border: 1px solid rgba(188,145,103,0.18);
+  }
+  .pa-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(800px 260px at 10% 0%, rgba(188,145,103,0.18), transparent 55%);
+    pointer-events: none;
+  }
+  .pa-card > * { position: relative; }
+
+  .pa-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 750;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: rgba(230, 237, 243, 0.85);
+    margin-bottom: 0.75rem;
+  }
+  .pa-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #bc9167;
+    box-shadow: 0 0 0 6px rgba(188,145,103,0.18);
+  }
+
+  .pa-title {
+    margin: 0 0 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    font-size: 1.35rem;
+    color: #ffffff;
+  }
+  .pa-desc {
+    margin: 0;
+    color: rgba(230, 237, 243, 0.88);
+    line-height: 1.85;
+    font-size: 1.03rem;
+  }
+  .pa-list {
+    margin: 1.15rem 0 0;
+    padding-left: 1.1rem;
+    color: rgba(230, 237, 243, 0.90);
+    line-height: 1.85;
+  }
+  .pa-list li { margin: 0.35rem 0; }
+
+  .pa-cta {
+    padding: 3.25rem 0 4rem;
+    text-align: center;
+  }
+  .pa-cta h2 {
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    color: #062841;
+    margin: 0;
+  }
+  .pa-cta p {
+    max-width: 70ch;
+    margin: 0.9rem auto 1.6rem;
+    color: rgba(6, 40, 65, 0.78);
+    line-height: 1.85;
+  }
+  .pa-cta .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1px solid #bc9167;
+    background: #bc9167;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+  }
+  .pa-cta .cta-btn:hover {
+    background: #a77c58;
+    border-color: #a77c58;
+  }
+  .pa-cta .cta-sub {
+    margin-top: 0.85rem;
+    font-size: 0.95rem;
+    color: rgba(6, 40, 65, 0.70);
+  }
+</style>
+
+<!-- ===== Hero ===== -->
+<section class="pa-hero">
+  <div class="container text-center">
+    <h1>Practice Areas</h1>
+    <div class="divider"></div>
+    <p class="lead">
+      Corporate-focused legal advice built for decision-makers. Clear drafting, strategic guidance, and calm execution —
+      across transactions, regulatory obligations, and complex commercial matters.
     </p>
   </div>
 </section>
 
-
 <!-- ===== Practice Areas Grid ===== -->
-<section class="pb-5">
+<section class="pa-grid">
   <div class="container">
     <div class="row g-4">
 
-      <!-- Family Law -->
-      <div class="col-md-4">
-        <div class="luxury-card h-100 p-4">
-          <h4 class="mb-3" style="color:#bc9167;">Family Law</h4>
-          <p style="color:#bc9167;">
-            Practical and strategic guidance through complex family matters 
-            with a focus on clarity, fairness, and resolution.
+      <!-- Corporate & Commercial -->
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card pa-card h-100">
+          <div class="pa-kicker"><span class="pa-dot"></span> Advisory & Transactions</div>
+          <h3 class="pa-title">Corporate &amp; Commercial</h3>
+          <p class="pa-desc">
+            Practical support for structuring, negotiations, and documentation — designed to reduce risk, shorten timelines,
+            and keep deals moving.
           </p>
-          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
-            <li>Divorce & separation</li>
-            <li>Parenting arrangements</li>
-            <li>Property settlements</li>
-            <li>Binding financial agreements</li>
+          <ul class="pa-list">
+            <li>Company structuring, governance &amp; shareholders’ arrangements</li>
+            <li>M&amp;A, asset purchases, and transaction execution support</li>
+            <li>Commercial drafting, review, and negotiation</li>
           </ul>
         </div>
       </div>
 
-      <!-- Estate & Wills -->
-      <div class="col-md-4">
-        <div class="luxury-card h-100 p-4">
-          <h4 class="mb-3" style="color:#bc9167;">Wills & Estates</h4>
-          <p style="color:#bc9167;">
-            Protect your assets and ensure your wishes are carried out with 
-            carefully structured estate planning.
+      <!-- Funds -->
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card pa-card h-100">
+          <div class="pa-kicker"><span class="pa-dot"></span> Structuring &amp; Documentation</div>
+          <h3 class="pa-title">Funds</h3>
+          <p class="pa-desc">
+            End-to-end support for fund managers and investment vehicles — from structuring choices through to execution
+            and ongoing obligations.
           </p>
-          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
-            <li>Wills & testament drafting</li>
-            <li>Estate planning</li>
-            <li>Probate applications</li>
-            <li>Estate disputes</li>
+          <ul class="pa-list">
+            <li>Fund establishment and structure selection</li>
+            <li>Offering materials and investor documentation</li>
+            <li>Transaction documentation and lifecycle support</li>
           </ul>
         </div>
       </div>
 
-      <!-- Employment & Civil -->
-      <div class="col-md-4">
-        <div class="luxury-card h-100 p-4">
-          <h4 class="mb-3" style="color:#bc9167;">Employment & Civil</h4>
-          <p style="color:#bc9167;">
-            Strong, practical legal support for workplace and civil matters 
-            with a focus on efficient resolution.
+      <!-- Financial Services Regulation -->
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card pa-card h-100">
+          <div class="pa-kicker"><span class="pa-dot"></span> Licensing &amp; Compliance</div>
+          <h3 class="pa-title">Financial Services Regulation</h3>
+          <p class="pa-desc">
+            Clear guidance through licensing, disclosure, and compliance — with a focus on practical implementation and
+            governance that stands up over time.
           </p>
-          <ul class="small mt-3" style="line-height:1.8;color:#bc9167;">
-            <li>Employment disputes</li>
-            <li>Contract review</li>
-            <li>Civil claims</li>
-            <li>Negotiation & representation</li>
+          <ul class="pa-list">
+            <li>AFSL/authorisations strategy and application support</li>
+            <li>Compliance frameworks, policies, and operational uplift</li>
+            <li>Ongoing governance, risk, and regulator engagement</li>
           </ul>
         </div>
       </div>
@@ -75,18 +203,20 @@
   </div>
 </section>
 
-
-<!-- ===== CTA Section ===== -->
-<section class="cta-section py-5 text-center">
+<!-- ===== CTA ===== -->
+<section class="pa-cta">
   <div class="container">
-    <h2 class="fw-semibold">Need legal guidance?</h2>
-    <p class="text-secondary mt-2 mb-4">
-      Book a confidential consultation to discuss your situation and next steps.
+    <h2>Need legal guidance?</h2>
+    <p>
+      Book a confidential consultation to discuss your objectives, risks, and next steps. You’ll receive clear advice,
+      documented options, and a plan that matches your urgency.
     </p>
 
-    <a href="{{ url_for('main.contact') }}" class="cta-btn">
-      Book Consultation
+    <a href="{{ url_for('main.contact') }}" class="cta-btn" aria-label="Book a consultation">
+      Book Consultation <span aria-hidden="true">→</span>
     </a>
+
+    <div class="cta-sub">Prefer email? Use the contact page and we’ll respond promptly.</div>
   </div>
 </section>
 

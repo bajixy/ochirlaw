@@ -17,9 +17,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
 
   <style>
-    /* ===== Global Background ===== */
+    /* ===== Global Background Pattern ===== */
     html, body {
-      background-color: #ededed !important;
+      background-color: #f4f4f4 !important;
+      background-image: url("{{ url_for('static', filename='images/Pattern 1x1-01.png') }}");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      background-attachment: fixed;
     }
 
     /* Ensure main content fills page nicely */
@@ -36,10 +40,16 @@
       transition: all 0.25s ease;
     }
 
+    /* Stronger horizontal framing */
+    .navbar .container {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
     .navbar .nav-link {
       font-weight: 500;
       color: #ffffff !important;
-      margin-left: 1rem;
+      margin-left: 1.2rem;
       position: relative;
       transition: all 0.25s ease;
     }
@@ -65,10 +75,16 @@
       width: 100%;
     }
 
-    /* Logo sizing */
+    /* Logo sizing with breathing space */
+    .navbar-brand {
+      padding: 10px 0; /* ensures space from navbar edges */
+    }
+
     .logo-img {
-      height: 48px;
+      height: 85px; /* slightly reduced to guarantee spacing */
       width: auto;
+      display: block;
+      padding: 0px 0; /* internal breathing room */
     }
 
     /* Phone number styling */
@@ -137,6 +153,11 @@
           <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %} href="{{ url_for('main.about') }}">About</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.team' %}active{% endif %}" {% if request.endpoint == 'main.team' %}aria-current="page"{% endif %} href="{{ url_for('main.team') }}">
+            Team
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link {% if request.endpoint == 'main.practice_areas' %}active{% endif %}" {% if request.endpoint == 'main.practice_areas' %}aria-current="page"{% endif %} href="{{ url_for('main.practice_areas') }}">Practice Areas</a>
         </li>
         <li class="nav-item">
@@ -145,13 +166,6 @@
           </a>
         </li>
       </ul>
-
-      <!-- Phone (visible on all screens) -->
-      <div class="d-flex align-items-center ms-lg-4 mt-3 mt-lg-0">
-        <a href="tel:+61400123456" class="nav-phone" aria-label="Call Ochir Law">
-          +61 0456 867 879
-        </a>
-      </div>
     </div>
   </div>
 </nav>
@@ -169,13 +183,17 @@
     </p>
 
     <p class="text-secondary small mb-1">
-      Professional Legal Counsel &middot; Family, Estate, Employment & Civil Law
+      Professional Legal Counsel &middot; Corporate & Commercial, Funds and Financial
     </p>
 
-    <!-- Terms link -->
+    <!-- Legal links -->
     <p class="small mb-0">
       <a href="{{ url_for('main.terms') }}" class="text-secondary text-decoration-none">
         Terms & Conditions
+      </a>
+      &nbsp;&middot;&nbsp;
+      <a href="{{ url_for('main.privacy') }}" class="text-secondary text-decoration-none">
+        Privacy Policy
       </a>
     </p>
   </div>
