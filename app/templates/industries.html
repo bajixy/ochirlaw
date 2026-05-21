@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Industries – Ochir Law{% endblock %}
+{% block meta_description %}Ochir Law advises clients across construction, financial services, funds, corporate, commercial, and Australia–Mongolia connected industries.{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <h1>Industries</h1>
+    <p>
+      Sector-aware legal advice for businesses operating in regulated, document-heavy, and commercially sensitive environments.
+    </p>
+  </div>
+</section>
+
+<section class="my-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Construction</h3>
+          <p>
+            Support for builders, subcontractors, project participants, and businesses managing construction contracts, payment claims, variations, and project risk.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Financial Services</h3>
+          <p>
+            Advice for financial services businesses navigating licensing, authorisations, governance, disclosure, compliance, and regulatory engagement.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Funds &amp; Investment</h3>
+          <p>
+            Guidance for fund managers, investment vehicles, and commercial participants seeking clear structuring, documentation, and lifecycle support.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Corporate &amp; Commercial</h3>
+          <p>
+            Practical legal support for companies, founders, investors, and decision-makers across transactions, contracts, governance, and commercial growth.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Australia–Mongolia Business</h3>
+          <p>
+            Cross-border awareness for clients with commercial, cultural, or investment connections between Australia and Mongolia.
+          </p>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="luxury-card h-100">
+          <h3>Professional Services</h3>
+          <p>
+            Contract, governance, and business advisory support for professional firms and service providers looking for clear, commercially grounded advice.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Need industry-specific legal guidance?</h2>
+    <p>
+      Ochir Law combines technical legal advice with practical commercial understanding, helping clients identify risk early and move forward with confidence.
+    </p>
+    <a href="{{ url_for('main.contact') }}" class="cta-btn">Book Consultation</a>
+  </div>
+</section>
+
+{% endblock %}
