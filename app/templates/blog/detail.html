@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% set is_mn = lang == 'mn' %}
+{% set title = post.title_mn if is_mn else post.title_en %}
+{% set summary = post.summary_mn if is_mn else post.summary_en %}
+{% set content = post.content_mn if is_mn else post.content_en %}
+
+{% block title %}{{ title }} – Ochir Law{% endblock %}
+{% block meta_description %}{{ summary or content[:155] }}{% endblock %}
+{% block head %}
+  <link rel="alternate" hreflang="en" href="{{ url_for('main.blog_detail', lang='en', slug=post.slug, _external=True) }}">
+  <link rel="alternate" hreflang="mn" href="{{ url_for('main.blog_detail', lang='mn', slug=post.slug, _external=True) }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ title|tojson }},
+    "description": {{ (summary or content[:155])|tojson }},
+    "author": {
+      "@type": "Person",
+      "name": {{ post.author|tojson }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Ochir Law"
+    },
+    "datePublished": "{{ post.created_at.isoformat() }}",
+    "dateModified": "{{ post.updated_at.isoformat() }}"
+  }
+  </script>
+{% endblock %}
+
+{% block content %}
+
+<article class="my-5">
+  <div class="container" style="max-width: 900px;">
+    <p class="small text-uppercase text-secondary mb-2" style="letter-spacing:0.08em;">
+      {{ post.category or ('Нийтлэл' if is_mn else 'Article') }} · {{ post.created_at.strftime('%d %B %Y') }}
+    </p>
+
+    <h1 class="section-title text-start" style="font-size:clamp(2rem,4vw,3rem);">{{ title }}</h1>
+
+    {% if summary %}
+      <p class="lead text-secondary mt-3">{{ summary }}</p>
+    {% endif %}
+
+    <div class="my-4">
+      <a class="cta-btn" href="{{ url_for('main.blog_detail', lang=alternate_lang, slug=post.slug) }}">
+        {{ 'Read in English' if is_mn else 'Монгол хэлээр унших' }}
+      </a>
+    </div>
+
+    {% if post.featured_image %}
+      <img src="{{ post.featured_image }}" alt="{{ title }}" class="img-fluid rounded mb-4">
+    {% endif %}
+
+    <div class="bg-white rounded p-4 p-md-5 shadow-sm" style="border:1px solid rgba(188,145,103,0.18);">
+      {% for paragraph in content.split('\n') %}
+        {% if paragraph.strip() %}
+          <p style="line-height:1.9;color:rgba(6,40,65,0.88);">{{ paragraph }}</p>
+        {% endif %}
+      {% endfor %}
+
+      <hr>
+      <p class="small text-secondary mb-0">
+        {{ 'Энэ нийтлэл нь ерөнхий мэдээллийн зориулалттай бөгөөд хууль зүйн зөвлөгөө биш юм. Өөрийн нөхцөл байдалд тохирсон зөвлөгөө авахын тулд Ochir Law-тэй холбогдоно уу.' if is_mn else 'This article is for general information only and is not legal advice. Contact Ochir Law for advice tailored to your circumstances.' }}
+      </p>
+    </div>
+
+    <div class="mt-4">
+      <a href="{{ url_for('main.blog_index', lang=lang) }}" class="text-secondary text-decoration-none">
+        ← {{ 'Бүх нийтлэл рүү буцах' if is_mn else 'Back to all articles' }}
+      </a>
+    </div>
+  </div>
+</article>
+
+{% endblock %}
