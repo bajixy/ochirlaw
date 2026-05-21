@@ -265,8 +265,8 @@ def contact():
             phone=phone,
             subject=subject or None,
             message=message,
-            ip_address=request.headers.get("X-Forwarded-For", request.remote_addr),
-            user_agent=(request.headers.get("User-Agent") or "")[:255],
+            source_address=request.headers.get("X-Forwarded-For", request.remote_addr),
+            browser_details=(request.headers.get("User-Agent") or "")[:255],
         )
 
         db.session.add(enquiry)
