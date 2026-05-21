@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% block title %}Ochir Law – Brisbane Legal Services | Strategic Legal Advice{% endblock %}
+{% block title %}Ochir Law – Australia Legal Services | Strategic Legal Advice{% endblock %}
 {% block meta_description %}
-  {% set meta_desc = "Ochir Law provides clear, strategic legal services in Brisbane, QLD. Get practical advice across corporate & commercial, wills & estates, employment and civil matters." %}
+  Ochir Law provides clear, strategic legal services across Australia. Get practical advice across corporate & commercial, funds, financial services, construction, and cross-border matters.
 {% endblock %}
 
 {% block content %}
@@ -15,7 +15,7 @@
     </h1>
 
     <p class="fade-up fade-delay-2">
-      Specialising in corporate, commercial, funds, and financial services regulation for businesses that demand clarity, strategy, and results. Based in <strong>Brisbane</strong>, with strong
+      Specialising in corporate, commercial, funds, financial services regulation, and construction for businesses that demand clarity, strategy, and results. Serving clients across <strong>Australia</strong>, with strong
       cross-border understanding for <strong>Mongolian</strong>-connected matters.
     </p>
 
@@ -76,53 +76,48 @@
 
     <div class="row text-center g-4">
 
-      <div class="col-md-6 col-lg-3">
-        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#corporate">
+      <div class="col-md-6 col-lg-4">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#corporate-commercial">
           <div class="luxury-card fade-up fade-delay-1">
-            <h3>Corporate</h3>
+            <h3>Corporate &amp; Commercial</h3>
             <p>
-              Corporate advisory and transactions including incorporations, governance,
-              restructures, shareholder arrangements, and strategic business changes.
-              Clear guidance across the full corporate lifecycle.
+              Corporate advisory and commercial transactions including incorporations, governance,
+              restructures, shareholder arrangements, contracts, and strategic business changes.
             </p>
           </div>
         </a>
       </div>
 
-      <div class="col-md-6 col-lg-3">
-        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#commercial">
-          <div class="luxury-card fade-up fade-delay-2">
-            <h3>Commercial</h3>
-            <p>
-              Review and drafting of commercial agreements with practical, risk-aware
-              structuring. From supplier and service contracts to tailored terms and
-              negotiation-ready documentation.
-            </p>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
-        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#fsr">
-          <div class="luxury-card fade-up fade-delay-3">
-            <h3>Financial Services Regulation</h3>
-            <p>
-              Structuring, licensing, and regulatory guidance for financial services
-              businesses. Navigate compliance, regulatory obligations, and strategic
-              setup with confidence.
-            </p>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-lg-3">
+      <div class="col-md-6 col-lg-4">
         <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#funds">
-          <div class="luxury-card fade-up fade-delay-4">
+          <div class="luxury-card fade-up fade-delay-2">
             <h3>Funds</h3>
             <p>
-              Fund structuring, transactions, and ongoing regulatory support.
-              Assistance across formation, investor arrangements, and evolving
-              compliance requirements.
+              Fund structuring, transactions, and ongoing regulatory support across formation,
+              investor arrangements, documentation, and evolving compliance requirements.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#financial-services">
+          <div class="luxury-card fade-up fade-delay-3">
+            <h3>Financial Services</h3>
+            <p>
+              Structuring, licensing, disclosure, and regulatory guidance for financial services
+              businesses seeking practical, implementation-focused advice.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-4 mx-lg-auto">
+        <a class="luxury-card-link" href="{{ url_for('main.practice_areas') }}#construction">
+          <div class="luxury-card fade-up fade-delay-4">
+            <h3>Construction</h3>
+            <p>
+              Practical support for contracts, project administration, and payment security — helping builders and subcontractors manage risk and keep projects moving.
             </p>
           </div>
         </a>

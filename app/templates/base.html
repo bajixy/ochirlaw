@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% block html_lang %}en{% endblock %}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{% block title %}Ochir Law{% endblock %}{% block title_suffix %}{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Strategic legal advice for individuals, families and businesses — Brisbane & Mongolia connected.{% endblock %}">
+  <meta name="description" content="{% block meta_description %}Strategic legal advice for businesses and individuals across Australia, with Mongolia-connected experience.{% endblock %}">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+  <!-- Preload the core local brand fonts used above the fold -->
+  <link rel="preload" href="{{ url_for('static', filename='Altone/ALTONE-VF.TTF') }}" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="{{ url_for('static', filename='JTBarnez/JTBARNEZ-LIGHT.TTF') }}" as="font" type="font/ttf" crossorigin>
 
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +26,7 @@
       background-color: #f4f4f4 !important;
       background-image: url("{{ url_for('static', filename='images/Pattern 1x1-01.png') }}");
       background-repeat: repeat;
-      background-size: 300px 300px;
+      background-size: 520px 520px;
       background-attachment: fixed;
     }
 
@@ -110,8 +114,6 @@
 </head>
 <body>
 
-
-
 <!-- ===== Intro Loader ===== -->
 <div id="intro-loader" class="intro-loader" aria-hidden="true">
   <div class="intro-inner">
@@ -135,14 +137,13 @@
   <div class="container">
     <!-- Logo + Brand -->
     <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
-      <img 
-        src="{{ url_for('static', filename='images/OchirLaw_Logo_Vertical_Navy.png') }}" 
+      <img
+        src="{{ url_for('static', filename='images/OchirLaw_Logo_Vertical_Navy.png') }}"
         alt="Ochir Law"
         class="me-2 logo-img"
       >
     </a>
-    
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -161,6 +162,12 @@
           <a class="nav-link {% if request.endpoint == 'main.practice_areas' %}active{% endif %}" {% if request.endpoint == 'main.practice_areas' %}aria-current="page"{% endif %} href="{{ url_for('main.practice_areas') }}">Practice Areas</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.industries' %}active{% endif %}" {% if request.endpoint == 'main.industries' %}aria-current="page"{% endif %} href="{{ url_for('main.industries') }}">Industries</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint in ['main.blog_index', 'main.blog_detail'] %}active{% endif %}" {% if request.endpoint in ['main.blog_index', 'main.blog_detail'] %}aria-current="page"{% endif %} href="{{ url_for('main.blog_index', lang='en') }}">Blog</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" {% if request.endpoint == 'main.contact' %}aria-current="page"{% endif %} href="{{ url_for('main.contact') }}">
             Book Consultation
           </a>
@@ -172,6 +179,15 @@
 
   <!-- ===== Main Content ===== -->
   <main id="main-content" class="page-content" tabindex="-1">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="container mt-3">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
   </main>
 
@@ -179,11 +195,11 @@
 <footer class="py-5 mt-5 border-top">
   <div class="container text-center">
     <p class="text-secondary small mb-1">
-      &copy; {{ current_year if current_year is defined else 2025 }} Ochir Law
+      &copy; {{ current_year if current_year is defined else 2026 }} Ochir Law
     </p>
 
     <p class="text-secondary small mb-1">
-      Professional Legal Counsel &middot; Corporate & Commercial, Funds and Financial
+      Professional Legal Counsel | Corporate &amp; Commercial | Funds | Financial Services | Construction
     </p>
 
     <!-- Legal links -->

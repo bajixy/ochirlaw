@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% set is_mn = lang == 'mn' %}
+{% block html_lang %}{{ 'mn' if is_mn else 'en' }}{% endblock %}
+{% block title %}{{ 'Нийтлэлүүд' if is_mn else 'Blog & Articles' }} – Ochir Law{% endblock %}
+{% block meta_description %}{{ 'Ochir Law legal updates and articles in Mongolian and English.' if not is_mn else 'Ochir Law-ийн хууль эрх зүйн нийтлэл, мэдээ мэдээлэл.' }}{% endblock %}
+
+{% block head %}
+<style>
+  .blog-lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem;
+    border: 1px solid rgba(188,145,103,0.28);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.72);
+    backdrop-filter: blur(8px);
+  }
+  .blog-lang-switch a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(6,40,65,0.72);
+  }
+  .blog-lang-switch a.active {
+    background: #bc9167;
+    color: #fff;
+  }
+  .mn-copy,
+  html[lang="mn"] .blog-page {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    letter-spacing: 0;
+  }
+  .mn-copy h1,
+  .mn-copy h2,
+  .mn-copy h3,
+  html[lang="mn"] .blog-page h1,
+  html[lang="mn"] .blog-page h2,
+  html[lang="mn"] .blog-page h3 {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header blog-page {{ 'mn-copy' if is_mn else '' }}">
+  <div class="container text-start">
+    <div class="mb-4">
+      <nav class="blog-lang-switch" aria-label="Blog language switcher">
+        <a href="{{ url_for('main.blog_index', lang='en') }}" class="{{ 'active' if not is_mn else '' }}">English</a>
+        <a href="{{ url_for('main.blog_index', lang='mn') }}" class="{{ 'active' if is_mn else '' }}">Монгол</a>
+      </nav>
+    </div>
+
+    <div class="text-center">
+      <h1>{{ 'Нийтлэлүүд' if is_mn else 'Blog & Articles' }}</h1>
+      <p>
+        {{ 'Бизнес, санхүүгийн үйлчилгээ, сан, барилга болон Австрали–Монголтой холбоотой эрх зүйн нийтлэлүүд.' if is_mn else 'Legal updates and practical articles across business, funds, financial services, construction, and Australia–Mongolia connected matters.' }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="my-5 blog-page {{ 'mn-copy' if is_mn else '' }}">
+  <div class="container">
+    {% if posts %}
+      <div class="row g-4">
+        {% for post in posts %}
+          <div class="col-12 col-lg-4">
+            <article class="luxury-card h-100">
+              {% if post.category %}
+                <p class="small text-uppercase mb-2" style="letter-spacing:0.08em;color:rgba(255,255,255,0.65);">{{ post.category }}</p>
+              {% endif %}
+              <h3>{{ post.title_mn if is_mn else post.title_en }}</h3>
+              <p>
+                {{ post.summary_mn if is_mn and post.summary_mn else post.summary_en or ((post.content_mn if is_mn else post.content_en)[:160] ~ '...') }}
+              </p>
+              <a class="cta-btn mt-3" href="{{ url_for('main.blog_detail', lang=lang, slug=post.slug) }}">
+                {{ 'Унших' if is_mn else 'Read Article' }}
+              </a>
+            </article>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center" style="max-width:720px;margin:0 auto;">
+        <h2>{{ 'Одоогоор нийтлэл байхгүй байна.' if is_mn else 'No articles published yet.' }}</h2>
+        <p class="text-secondary">
+          {{ 'Шинэ нийтлэлүүд удахгүй нэмэгдэнэ.' if is_mn else 'New legal updates will be added soon.' }}
+        </p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
