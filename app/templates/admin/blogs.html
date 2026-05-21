@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Manage Blog – Ochir Law{% endblock %}
+
+{% block content %}
+<section class="my-5">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+      <div>
+        <h1>Manage Blog Articles</h1>
+        <p class="text-secondary mb-0">Create and manage English/Mongolian articles.</p>
+      </div>
+      <div>
+        <a class="cta-btn" href="{{ url_for('main.admin_blog_new') }}">New Article</a>
+        <a class="text-secondary ms-3" href="{{ url_for('main.admin_logout') }}">Logout</a>
+      </div>
+    </div>
+
+    <div class="bg-white rounded shadow-sm p-3" style="border:1px solid rgba(188,145,103,0.18);">
+      {% if posts %}
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Status</th>
+                <th>Updated</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for post in posts %}
+                <tr>
+                  <td>
+                    <strong>{{ post.title_en }}</strong><br>
+                    <span class="text-secondary small">{{ post.title_mn }}</span>
+                  </td>
+                  <td><code>{{ post.slug }}</code></td>
+                  <td>{{ 'Published' if post.is_published else 'Draft' }}</td>
+                  <td>{{ post.updated_at.strftime('%d %b %Y') }}</td>
+                  <td class="text-end">
+                    <a href="{{ url_for('main.admin_blog_edit', post_id=post.id) }}">Edit</a>
+                    {% if post.is_published %}
+                      <span class="text-secondary mx-2">·</span>
+                      <a href="{{ url_for('main.blog_detail', lang='en', slug=post.slug) }}">View</a>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <p class="mb-0 text-secondary">No blog articles yet. Create the first article to begin publishing.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
