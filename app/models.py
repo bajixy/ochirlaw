@@ -13,6 +13,8 @@ class Enquiry(db.Model):
     phone = db.Column(db.String(40), nullable=False)
     subject = db.Column(db.String(160))
     message = db.Column(db.Text, nullable=False)
+    source_address = db.Column(db.String(80))
+    browser_details = db.Column(db.String(255))
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
 
