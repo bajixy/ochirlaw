@@ -85,6 +85,16 @@ def privacy_policy():
     return redirect(url_for("main.privacy"))
 
 
+@main.route("/privacy-collection-statement")
+def collection_statement():
+    return render_template("privacy_collection_statement.html")
+
+
+@main.route("/collection-statement")
+def collection_statement_redirect():
+    return redirect(url_for("main.collection_statement"))
+
+
 @main.route("/terms-and-conditions")
 def terms_and_conditions():
     return redirect(url_for("main.terms"))
