@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Collection Statement – Ochir Law{% endblock %}
+
+{% block content %}
+
+<style>
+  .privacy-wrap { padding: clamp(2rem, 4vw, 3.5rem) 0 4rem; }
+  .privacy-wrap h1 {
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    margin-bottom: 0.5rem;
+    color: #062841;
+  }
+  .privacy-divider {
+    width: 70px;
+    height: 3px;
+    background: #bc9167;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+  .privacy-wrap h2 {
+    margin-top: 2.2rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.4px;
+    color: #062841;
+  }
+  .privacy-wrap p,
+  .privacy-wrap li {
+    line-height: 1.85;
+    color: rgba(6,40,65,0.85);
+    font-size: 1rem;
+  }
+  .privacy-wrap ul { margin-top: 0.6rem; padding-left: 1.2rem; }
+  .privacy-meta { font-size: 0.9rem; color: rgba(6,40,65,0.65); margin-top: 2rem; }
+  .privacy-wrap a { color: #062841; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<section class="privacy-wrap">
+  <div class="container" style="max-width: 900px;">
+
+    <h1>Privacy Collection Statement</h1>
+    <div class="privacy-divider"></div>
+
+    <p>
+      Ochir Law Pty Ltd ACN 692 540 426 (“Ochir Law”, “we”, “us” and “our”) is committed to protecting your privacy.
+      This Privacy Collection Statement should be read together with our <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>.
+    </p>
+
+    <h2>1. Your personal information</h2>
+    <p>
+      Personal information collected, held and used by Ochir Law may include your name, address, date of birth, phone number,
+      email address, gender and other categories of personal information detailed in our Privacy Policy.
+    </p>
+
+    <h2>2. How we collect personal information</h2>
+    <p>Ochir Law collects personal information in several ways, including when:</p>
+    <ul>
+      <li>We provide services via email or our website;</li>
+      <li>We provide assistance or support for our products or services;</li>
+      <li>You participate in functions, events, activities or social media pages;</li>
+      <li>You request information about our products or services;</li>
+      <li>You upload or submit information to us or our website; or</li>
+      <li>You complete forms, surveys or provide feedback to us.</li>
+    </ul>
+
+    <h2>3. Why we collect, use and disclose personal information</h2>
+    <p>
+      Ochir Law collects, stores, uses and discloses personal information for operational and marketing purposes, including to:
+    </p>
+    <ul>
+      <li>Contact you about Ochir Law’s products and services or an ongoing matter;</li>
+      <li>Provide marketing material and information about products, services and events;</li>
+      <li>Send documents or other materials;</li>
+      <li>Process payments;</li>
+      <li>Research and develop Ochir Law’s services;</li>
+      <li>Analyse use, activity and performance of our website, products and services; and</li>
+      <li>Comply with legal obligations and respond to lawful requests.</li>
+    </ul>
+
+    <h2>4. Direct marketing</h2>
+    <p>
+      We may use personal information for direct marketing. You may opt out using the unsubscribe link in marketing material or by contacting us.
+    </p>
+
+    <h2>5. What happens if you do not provide personal information</h2>
+    <p>
+      You do not have to provide us with your personal information. Where possible, we will give you the option to interact with us
+      anonymously or by using a pseudonym. However, if you choose not to provide information we require, we may not be able to effectively
+      interact with you or provide services to you.
+    </p>
+
+    <h2>6. Who we disclose personal information to</h2>
+    <p>Ochir Law may disclose personal information to:</p>
+    <ul>
+      <li>Third parties connected with the purposes listed above;</li>
+      <li>Our professional advisers;</li>
+      <li>A buyer or successor in interest of our business and their advisers; and</li>
+      <li>Other parties where required or permitted by law.</li>
+    </ul>
+    <p>
+      Some third parties may be based in or have servers located outside Australia. Where this occurs, we take reasonable steps to maintain data security and appropriate privacy practices.
+    </p>
+
+    <h2>7. Accuracy, access and complaints</h2>
+    <p>
+      We take reasonable steps to ensure personal information is accurate, complete and up to date. Our Privacy Policy explains how you may access or correct personal information, or make a privacy complaint.
+    </p>
+
+    <h2>8. Contact details</h2>
+    <p>
+      If you have questions or concerns about privacy and your personal information, contact Ochir Law at
+      <a href="mailto:m.saruul@ochirlaw.com.au">m.saruul@ochirlaw.com.au</a> or call <a href="tel:+61456867879">0456 867 879</a>.
+    </p>
+
+    <div class="privacy-meta">Last updated: 10 April 2026</div>
+
+  </div>
+</section>
+
+{% endblock %}
