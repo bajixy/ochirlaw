@@ -1,5 +1,3 @@
-
-
 {% extends "base.html" %}
 
 {% block title %}Contact | Ochir Law{% endblock %}
@@ -19,7 +17,7 @@
     text-align: center;
   }
   .contact-hero .divider {
-    width: 70px;s
+    width: 70px;
     height: 3px;
     margin: 14px auto 0;
     background: #bc9167;
@@ -34,13 +32,61 @@
     font-size: 1.05rem;
   }
 
-  .contact-frame {
+  .contact-frame-wrap {
     width: 100%;
-    height: clamp(560px, 72vh, 760px);
-    border: none;
-    display: block;
+    min-height: 860px;
     border-radius: 18px;
     overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(6,40,65,0.12);
+    box-shadow: 0 18px 40px rgba(6,40,65,0.12);
+  }
+
+  .contact-frame {
+    width: 100%;
+    min-height: 860px;
+    height: 88vh;
+    border: none;
+    display: block;
+    background: #ffffff;
+  }
+
+  .intake-fallback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(188,145,103,0.28);
+  }
+
+  .intake-fallback p {
+    margin: 0;
+    color: rgba(6,40,65,0.78);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .intake-fallback a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.72rem 1rem;
+    border-radius: 999px;
+    background: #062841;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .intake-fallback a:hover {
+    background: #bc9167;
+    color: #ffffff;
   }
 
   /* Right panel readability on dark luxury-card */
@@ -75,18 +121,23 @@
     color: rgba(230,237,243,0.78);
   }
   .contact-legal a { color: rgba(230,237,243,0.92); }
-  /* Reduce vertical gap on mobile */
+
   @media (max-width: 991px) {
     .row.g-5 {
-      --bs-gutter-y: 1.5rem; /* reduce Bootstrap vertical gutter */
+      --bs-gutter-y: 1.5rem;
     }
 
     .contact-hero {
       margin-bottom: 0.75rem;
     }
 
+    .contact-frame-wrap,
     .contact-frame {
-      margin-bottom: 0.5rem;
+      min-height: 780px;
+    }
+
+    .contact-frame {
+      height: 82vh;
     }
   }
 </style>
@@ -94,28 +145,42 @@
 <section class="container contact-wrap" style="min-height: 80vh; max-width: 1100px;">
   <div class="row g-5">
 
-  <div class="col-12">
-    <div class="contact-hero">
-      <h1>Book a Consultation</h1>
-      <div class="divider"></div>
-      <p>
-        Submit an enquiry through our secure intake form. We’ll review your request, conduct conflict checks,
-        and respond with the next steps.
-      </p>
+    <div class="col-12">
+      <div class="contact-hero">
+        <h1>Book a Consultation</h1>
+        <div class="divider"></div>
+        <p>
+          Submit an enquiry through our secure intake form. We’ll review your request, conduct conflict checks,
+          and respond with the next steps.
+        </p>
+      </div>
     </div>
-  </div>
 
     <!-- Intake Form -->
     <div class="col-lg-8">
-      <iframe
-        src="https://matter-intake.com.au/create/b494fc9e-b46b-4263-9efa-be9e6c5f8d6d"
-        class="contact-frame"
-        id="matter-intake-iframe"
-        name="matter-intake-iframe"
-        title="Ochir Law – Consultation intake form"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
+      <div class="intake-fallback">
+        <p>
+          If the booking form does not appear below, open the secure intake form directly.
+        </p>
+        <a
+          href="https://matter-intake.com.au/create/b494fc9e-b46b-4263-9efa-be9e6c5f8d6d"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open intake form
+        </a>
+      </div>
+
+      <div class="contact-frame-wrap">
+        <iframe
+          src="https://matter-intake.com.au/create/b494fc9e-b46b-4263-9efa-be9e6c5f8d6d"
+          class="contact-frame"
+          id="matter-intake-iframe"
+          name="matter-intake-iframe"
+          title="Ochir Law – Consultation intake form"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </div>
 
     <!-- Right Side Information Panel -->
