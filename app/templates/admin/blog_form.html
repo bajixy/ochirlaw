@@ -2,8 +2,9 @@
 {% block title %}{{ 'New' if mode == 'new' else 'Edit' }} Blog Article – Ochir Law{% endblock %}
 
 {% block content %}
-<section class="container my-5" style="max-width: 980px;">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h1 class="section-title text-start mb-1">{{ 'New' if mode == 'new' else 'Edit' }} Blog Article</h1>
-      <p
+<section class="my-5">
+  <div class="container" style="max-width:980px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1>{{ 'New Blog Article' if mode == 'new' else 'Edit Blog Article' }}</h1>
+        <p class="text-secondary
