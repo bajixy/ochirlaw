@@ -3,15 +3,42 @@
 
 {% block content %}
 <style>
+  .editor-page { padding: 2.5rem 0 4rem; }
   .editor-shell {
     background: #fff;
-    border: 1px solid rgba(188,145,103,0.18);
+    border: 1px solid rgba(188,145,103,0.22);
     border-radius: 24px;
     box-shadow: 0 18px 45px rgba(6,40,65,0.08);
     overflow: hidden;
   }
-  .editor-topbar {
+  .editor-header {
+    padding: 1.4rem 1.6rem;
+    background: linear-gradient(135deg, #062841, #0d3f63);
+    color: #fff;
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    align
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .editor-header h1 { margin: 0; font-size: 1.35rem; font-weight: 900; }
+  .editor-header p { margin: 0.3rem 0 0; color: rgba(255,255,255,0.76); }
+  .editor-body { padding: 1.5rem; }
+  .field-label { font-weight: 800; color: #062841; margin-bottom: .45rem; }
+  .form-control, .form-select {
+    border-radius: 14px;
+    border: 1px solid rgba(6,40,65,0.16);
+    padding: .82rem .95rem;
+  }
+  .form-control:focus, .form-select:focus {
+    border-color: #bc9167;
+    box-shadow: 0 0 0 .2rem rgba(188,145,103,.16);
+  }
+  .lang-tabs { display:flex; gap:.5rem; flex-wrap:wrap; margin: 1.3rem 0 1rem; }
+  .lang-tab {
+    border: 1px solid rgba(188,145,103,.28);
+    background: #fff;
+    color: #062841;
+    border-radius: 999px;
+    padding: .58rem 1rem;
+    font
