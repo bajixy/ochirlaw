@@ -1,9 +1,741 @@
 {% extends "base.html" %}
-{% block title %}{{ 'New' if mode == 'new' else 'Edit' }} Blog Article – Ochir Law{% endblock %}
+
+{% block title %}{{ "New Blog Article" if mode == "new" else "Edit Blog Article" }} – Ochir Law{% endblock %}
+
 {% block content %}
-<section class="my-5">
-  <div class="container" style="max-width:980px;">
-    <div class="d-flex justify-content-between align-items-center mb-4">
+
+<style>
+  .admin-blog-wrap {
+    padding: clamp(2rem, 4vw, 3.5rem) 0 4rem;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .admin-header h1 {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.4px;
+    color: #062841;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+  }
+
+  .admin-header p {
+    margin: 0.55rem 0 0;
+    color: rgba(6,40,65,0.72);
+    line-height: 1.65;
+    max-width: 70ch;
+  }
+
+  .admin-card {
+    background: #ffffff;
+    border: 1px solid rgba(6,40,65,0.10);
+    border-radius: 22px;
+    box-shadow: 0 18px 45px rgba(6,40,65,0.08);
+    padding: clamp(1.2rem, 2.6vw, 2rem);
+  }
+
+  .form-label {
+    font-weight: 800;
+    color: #062841;
+    margin-bottom: 0.45rem;
+  }
+
+  .form-control,
+  .form-select {
+    border-radius: 14px;
+    border: 1px solid rgba(6,40,65,0.18);
+    padding: 0.8rem 0.9rem;
+  }
+
+  .form-control:focus,
+  .form-select:focus {
+    border-color: #bc9167;
+    box-shadow: 0 0 0 0.2rem rgba(188,145,103,0.18);
+  }
+
+  .field-help {
+    font-size: 0.88rem;
+    color: rgba(6,40,65,0.60);
+    margin-top: 0.35rem;
+  }
+
+  .editor-tabs {
+    display: flex;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .editor-tab {
+    border: 1px solid rgba(188,145,103,0.35);
+    background: rgba(188,145,103,0.08);
+    color: #062841;
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .editor-tab.active {
+    background: #062841;
+    color: #ffffff;
+    border-color: #062841;
+  }
+
+  .language-panel {
+    display: none;
+  }
+
+  .language-panel.active {
+    display: block;
+  }
+
+  .editor-shell {
+    border: 1px solid rgba(6,40,65,0.14);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.7rem;
+    background: linear-gradient(180deg, rgba(6,40,65,0.04), rgba(6,40,65,0.015));
+    border-bottom: 1px solid rgba(6,40,65,0.10);
+  }
+
+  .editor-toolbar button {
+    border: 1px solid rgba(6,40,65,0.14);
+    background: #ffffff;
+    color: #062841;
+    border-radius: 10px;
+    padding: 0.5rem 0.7rem;
+    font-weight: 800;
+    cursor: pointer;
+    min-width: 42px;
+  }
+
+  .editor-toolbar button:hover {
+    background: rgba(188,145,103,0.12);
+    border-color: rgba(188,145,103,0.45);
+  }
+
+  .editor-toolbar .toolbar-divider {
+    width: 1px;
+    background: rgba(6,40,65,0.12);
+    margin: 0 0.25rem;
+  }
+
+  .rich-editor {
+    min-height: 520px;
+    padding: clamp(1rem, 2vw, 1.6rem);
+    outline: none;
+    color: #062841;
+    line-height: 1.85;
+    font-size: 1.02rem;
+  }
+
+  .rich-editor:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(6,40,65,0.42);
+  }
+
+  .rich-editor h2 {
+    margin: 1.7rem 0 0.75rem;
+    font-size: 1.75rem;
+    line-height: 1.25;
+    color: #062841;
+    font-weight: 900;
+  }
+
+  .rich-editor h3 {
+    margin: 1.35rem 0 0.6rem;
+    font-size: 1.32rem;
+    line-height: 1.3;
+    color: #062841;
+    font-weight: 900;
+  }
+
+  .rich-editor p {
+    margin: 0 0 1rem;
+  }
+
+  .rich-editor blockquote {
+    margin: 1.4rem 0;
+    padding: 1rem 1.2rem;
+    border-left: 4px solid #bc9167;
+    background: rgba(188,145,103,0.08);
+    border-radius: 0 14px 14px 0;
+    font-size: 1.08rem;
+    color: rgba(6,40,65,0.82);
+  }
+
+  .rich-editor a {
+    color: #062841;
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .rich-editor img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1.4rem auto;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(6,40,65,0.12);
+  }
+
+  .rich-editor ul,
+  .rich-editor ol {
+    margin: 0 0 1.1rem;
+    padding-left: 1.35rem;
+  }
+
+  .drop-zone {
+    margin-top: 0.8rem;
+    border: 1.5px dashed rgba(188,145,103,0.55);
+    border-radius: 16px;
+    padding: 0.9rem 1rem;
+    background: rgba(188,145,103,0.07);
+    color: rgba(6,40,65,0.72);
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .drop-zone.dragover {
+    background: rgba(188,145,103,0.16);
+    border-color: #bc9167;
+  }
+
+  .preview-card {
+    border: 1px solid rgba(6,40,65,0.10);
+    border-radius: 18px;
+    padding: 1.4rem;
+    background: rgba(6,40,65,0.025);
+    margin-top: 1rem;
+    display: none;
+  }
+
+  .preview-card.active {
+    display: block;
+  }
+
+  .preview-card h4 {
+    color: #062841;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+
+  .preview-content {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #062841;
+    line-height: 1.85;
+  }
+
+  .preview-content img {
+    max-width: 100%;
+    border-radius: 18px;
+    margin: 1.2rem auto;
+    display: block;
+  }
+
+  .admin-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.4rem;
+  }
+
+  .btn-brand {
+    background: #062841;
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 0.8rem 1.25rem;
+    font-weight: 900;
+  }
+
+  .btn-brand:hover {
+    background: #bc9167;
+    color: #ffffff;
+  }
+
+  .btn-soft {
+    border: 1px solid rgba(188,145,103,0.45);
+    color: #062841;
+    background: rgba(188,145,103,0.08);
+    border-radius: 999px;
+    padding: 0.8rem 1.1rem;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .btn-soft:hover {
+    background: rgba(188,145,103,0.18);
+    color: #062841;
+  }
+
+  .publish-box {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+    background: rgba(188,145,103,0.08);
+    border: 1px solid rgba(188,145,103,0.24);
+    color: #062841;
+    font-weight: 800;
+  }
+
+  .hidden-textarea {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .editor-toolbar button {
+      padding: 0.45rem 0.6rem;
+      font-size: 0.88rem;
+    }
+
+    .rich-editor {
+      min-height: 420px;
+    }
+  }
+</style>
+
+<section class="admin-blog-wrap">
+  <div class="container" style="max-width: 1180px;">
+
+    <div class="admin-header">
       <div>
-        <h1>{{ 'New Blog Article' if mode == 'new' else 'Edit Blog Article' }}</h1>
-        <p class="text-secondary
+        <h1>{{ "New Blog Article" if mode == "new" else "Edit Blog Article" }}</h1>
+        <p>
+          Create a polished bilingual article with headings, links, quotes, lists and magazine-style images.
+        </p>
+      </div>
+
+      <a href="{{ url_for('main.admin_blogs') }}" class="btn-soft">← Back to Blog Admin</a>
+    </div>
+
+    <form method="POST" class="admin-card" id="blogForm">
+
+      <div class="row g-4">
+        <div class="col-12 col-lg-6">
+          <label class="form-label" for="title_en">English Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title_en"
+            name="title_en"
+            value="{{ post.title_en or '' }}"
+            required
+          >
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <label class="form-label" for="title_mn">Mongolian Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title_mn"
+            name="title_mn"
+            value="{{ post.title_mn or '' }}"
+            required
+          >
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <label class="form-label" for="summary_en">English Summary</label>
+          <textarea
+            class="form-control"
+            id="summary_en"
+            name="summary_en"
+            rows="3"
+            required
+          >{{ post.summary_en or '' }}</textarea>
+          <div class="field-help">Short intro shown on the blog listing page.</div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <label class="form-label" for="summary_mn">Mongolian Summary</label>
+          <textarea
+            class="form-control"
+            id="summary_mn"
+            name="summary_mn"
+            rows="3"
+            required
+          >{{ post.summary_mn or '' }}</textarea>
+          <div class="field-help">Mongolian version of the short intro.</div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <label class="form-label" for="slug">Slug</label>
+          <input
+            type="text"
+            class="form-control"
+            id="slug"
+            name="slug"
+            value="{{ post.slug or '' }}"
+            placeholder="article-url-slug"
+          >
+          <div class="field-help">Leave blank to auto-create from English title.</div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <label class="form-label" for="category">Category</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            name="category"
+            value="{{ post.category or '' }}"
+            placeholder="Corporate, Commercial, Funds..."
+          >
+        </div>
+
+        <div class="col-12 col-lg-4">
+          <label class="form-label" for="author">Author</label>
+          <input
+            type="text"
+            class="form-control"
+            id="author"
+            name="author"
+            value="{{ post.author or 'Munkh-Erdene Saruul' }}"
+          >
+        </div>
+
+        <div class="col-12">
+          <label class="form-label" for="featured_image">Featured Image URL</label>
+          <input
+            type="url"
+            class="form-control"
+            id="featured_image"
+            name="featured_image"
+            value="{{ post.featured_image or '' }}"
+            placeholder="https://..."
+          >
+          <div class="field-help">
+            Use an external image URL for the article hero image. Later, you can connect this to Cloudinary or S3 for real uploads.
+          </div>
+        </div>
+      </div>
+
+      <hr style="margin: 2rem 0; border-color: rgba(6,40,65,0.10);">
+
+      <div class="editor-tabs">
+        <button type="button" class="editor-tab active" data-target="panel-en">English Article</button>
+        <button type="button" class="editor-tab" data-target="panel-mn">Mongolian Article</button>
+      </div>
+
+      <div id="panel-en" class="language-panel active">
+        <label class="form-label">English Article Content</label>
+
+        <div class="editor-shell">
+          <div class="editor-toolbar" data-editor="editor_en">
+            <button type="button" data-command="formatBlock" data-value="h2">H2</button>
+            <button type="button" data-command="formatBlock" data-value="h3">H3</button>
+            <button type="button" data-command="formatBlock" data-value="p">P</button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="bold"><strong>B</strong></button>
+            <button type="button" data-command="italic"><em>I</em></button>
+            <button type="button" data-command="underline"><u>U</u></button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="insertUnorderedList">• List</button>
+            <button type="button" data-command="insertOrderedList">1. List</button>
+            <button type="button" data-action="quote">Quote</button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-action="link">Link</button>
+            <button type="button" data-action="image">Image URL</button>
+            <button type="button" data-action="clear">Clear</button>
+          </div>
+
+          <div
+            id="editor_en"
+            class="rich-editor"
+            contenteditable="true"
+            data-placeholder="Write the English article here..."
+          >{{ post.content_en|safe if post.content_en else '' }}</div>
+        </div>
+
+        <div class="drop-zone" data-editor="editor_en">
+          Drag an image onto the editor area to insert it. For best production quality, use Image URL instead of large local images.
+        </div>
+
+        <button type="button" class="btn-soft mt-3 preview-toggle" data-editor="editor_en" data-preview="preview_en">
+          Preview English Article
+        </button>
+
+        <div id="preview_en" class="preview-card">
+          <h4>English Preview</h4>
+          <div class="preview-content"></div>
+        </div>
+
+        <textarea
+          class="hidden-textarea"
+          id="content_en"
+          name="content_en"
+          required
+        >{{ post.content_en or '' }}</textarea>
+      </div>
+
+      <div id="panel-mn" class="language-panel">
+        <label class="form-label">Mongolian Article Content</label>
+
+        <div class="editor-shell">
+          <div class="editor-toolbar" data-editor="editor_mn">
+            <button type="button" data-command="formatBlock" data-value="h2">H2</button>
+            <button type="button" data-command="formatBlock" data-value="h3">H3</button>
+            <button type="button" data-command="formatBlock" data-value="p">P</button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="bold"><strong>B</strong></button>
+            <button type="button" data-command="italic"><em>I</em></button>
+            <button type="button" data-command="underline"><u>U</u></button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-command="insertUnorderedList">• List</button>
+            <button type="button" data-command="insertOrderedList">1. List</button>
+            <button type="button" data-action="quote">Quote</button>
+            <span class="toolbar-divider"></span>
+            <button type="button" data-action="link">Link</button>
+            <button type="button" data-action="image">Image URL</button>
+            <button type="button" data-action="clear">Clear</button>
+          </div>
+
+          <div
+            id="editor_mn"
+            class="rich-editor"
+            contenteditable="true"
+            data-placeholder="Монгол нийтлэлийн агуулгыг энд бичнэ..."
+          >{{ post.content_mn|safe if post.content_mn else '' }}</div>
+        </div>
+
+        <div class="drop-zone" data-editor="editor_mn">
+          Drag an image onto the editor area to insert it. For best production quality, use Image URL instead of large local images.
+        </div>
+
+        <button type="button" class="btn-soft mt-3 preview-toggle" data-editor="editor_mn" data-preview="preview_mn">
+          Preview Mongolian Article
+        </button>
+
+        <div id="preview_mn" class="preview-card">
+          <h4>Mongolian Preview</h4>
+          <div class="preview-content"></div>
+        </div>
+
+        <textarea
+          class="hidden-textarea"
+          id="content_mn"
+          name="content_mn"
+          required
+        >{{ post.content_mn or '' }}</textarea>
+      </div>
+
+      <div class="admin-actions">
+        <label class="publish-box">
+          <input
+            type="checkbox"
+            name="is_published"
+            {% if post.is_published %}checked{% endif %}
+          >
+          Publish article
+        </label>
+
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <a href="{{ url_for('main.admin_blogs') }}" class="btn-soft">Cancel</a>
+          <button type="submit" class="btn-brand">
+            {{ "Create Article" if mode == "new" else "Save Changes" }}
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<script>
+  const editors = {
+    editor_en: document.getElementById("editor_en"),
+    editor_mn: document.getElementById("editor_mn")
+  };
+
+  const hiddenFields = {
+    editor_en: document.getElementById("content_en"),
+    editor_mn: document.getElementById("content_mn")
+  };
+
+  function focusEditor(editorId) {
+    const editor = editors[editorId];
+    editor.focus();
+  }
+
+  function syncEditors() {
+    hiddenFields.editor_en.value = editors.editor_en.innerHTML.trim();
+    hiddenFields.editor_mn.value = editors.editor_mn.innerHTML.trim();
+  }
+
+  function insertHtml(editorId, html) {
+    focusEditor(editorId);
+    document.execCommand("insertHTML", false, html);
+    syncEditors();
+  }
+
+  document.querySelectorAll(".editor-tab").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".editor-tab").forEach((tab) => tab.classList.remove("active"));
+      document.querySelectorAll(".language-panel").forEach((panel) => panel.classList.remove("active"));
+
+      button.classList.add("active");
+      document.getElementById(button.dataset.target).classList.add("active");
+    });
+  });
+
+  document.querySelectorAll(".editor-toolbar button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const toolbar = button.closest(".editor-toolbar");
+      const editorId = toolbar.dataset.editor;
+      const command = button.dataset.command;
+      const value = button.dataset.value || null;
+      const action = button.dataset.action || null;
+
+      focusEditor(editorId);
+
+      if (command) {
+        document.execCommand(command, false, value);
+        syncEditors();
+        return;
+      }
+
+      if (action === "quote") {
+        insertHtml(editorId, "<blockquote>Write a pull quote or important extract here.</blockquote>");
+        return;
+      }
+
+      if (action === "link") {
+        const url = prompt("Paste the URL:");
+        if (!url) return;
+
+        const text = prompt("Link text:", window.getSelection().toString() || "Read more");
+        if (!text) return;
+
+        const safeUrl = url.startsWith("http") ? url : "https://" + url;
+        insertHtml(editorId, `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`);
+        return;
+      }
+
+      if (action === "image") {
+        const url = prompt("Paste image URL:");
+        if (!url) return;
+
+        const alt = prompt("Image description / alt text:", "Article image") || "Article image";
+        insertHtml(editorId, `<figure><img src="${url}" alt="${alt}"><figcaption>${alt}</figcaption></figure>`);
+        return;
+      }
+
+      if (action === "clear") {
+        const confirmClear = confirm("Clear this article editor?");
+        if (!confirmClear) return;
+
+        editors[editorId].innerHTML = "";
+        syncEditors();
+      }
+    });
+  });
+
+  Object.values(editors).forEach((editor) => {
+    editor.addEventListener("input", syncEditors);
+    editor.addEventListener("blur", syncEditors);
+
+    editor.addEventListener("paste", (event) => {
+      event.preventDefault();
+
+      const text = (event.clipboardData || window.clipboardData).getData("text/plain");
+      const clean = text
+        .split(/\n{2,}/)
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean)
+        .map((paragraph) => `<p>${paragraph.replace(/\n/g, "<br>")}</p>`)
+        .join("");
+
+      document.execCommand("insertHTML", false, clean);
+      syncEditors();
+    });
+  });
+
+  document.querySelectorAll(".drop-zone").forEach((zone) => {
+    const editorId = zone.dataset.editor;
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+      zone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        zone.classList.add("dragover");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      zone.addEventListener(eventName, (event) => {
+        event.preventDefault();
+        zone.classList.remove("dragover");
+      });
+    });
+
+    zone.addEventListener("drop", (event) => {
+      const files = Array.from(event.dataTransfer.files || []);
+      const image = files.find((file) => file.type.startsWith("image/"));
+
+      if (!image) {
+        alert("Please drop an image file.");
+        return;
+      }
+
+      if (image.size > 900000) {
+        alert("This image is quite large. Use an image URL instead for production.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        insertHtml(
+          editorId,
+          `<figure><img src="${reader.result}" alt="Uploaded article image"><figcaption>Image caption</figcaption></figure>`
+        );
+      };
+      reader.readAsDataURL(image);
+    });
+  });
+
+  document.querySelectorAll(".preview-toggle").forEach((button) => {
+    button.addEventListener("click", () => {
+      const editor = editors[button.dataset.editor];
+      const preview = document.getElementById(button.dataset.preview);
+      const previewContent = preview.querySelector(".preview-content");
+
+      previewContent.innerHTML = editor.innerHTML;
+      preview.classList.toggle("active");
+    });
+  });
+
+  document.getElementById("blogForm").addEventListener("submit", (event) => {
+    syncEditors();
+
+    if (!hiddenFields.editor_en.value.trim() || !hiddenFields.editor_mn.value.trim()) {
+      event.preventDefault();
+      alert("Both English and Mongolian article content are required.");
+    }
+  });
+
+  syncEditors();
+</script>
+
+{% endblock %}
