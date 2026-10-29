@@ -1,0 +1,10 @@
+# Copy this whole folder to start a new post, and rename the copy.
+# The folder name becomes the web address: content/blog/my-post -> /blog/en/my-post/
+# Folders starting with _ are ignored, so this example never appears on the site.
+
+date: 2026-10-29
+category: Construction          # shown above the title
+author: Munkh-Erdene Saruul
+image: cover.jpg                # optional: an image file in this folder
+published: true                 # set to false to hide the post without deleting it
+# layout: blog/layouts/my-design.html   # optional: a custom page design

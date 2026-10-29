@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Page not found | Ochir Law{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div class="container text-center" style="max-width:720px;">
+    <h1>Page not found</h1>
+    <p>The page you were looking for has moved or no longer exists.</p>
+    <a class="cta-btn mt-3" href="{{ url_for('main.index') }}">Back to home</a>
+  </div>
+</section>
+{% endblock %}
