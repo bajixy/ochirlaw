@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+
+{% block title %}Contact | Ochir Law{% endblock %}
+
+{% block content %}
+
+<style>
+  /* Contact page – scoped styling */
+  .contact-wrap { padding: clamp(3.5rem, 6vw, 5rem) 0 4rem; }
+  @media (max-width: 991px) {
+    .contact-wrap { padding-left: 0.75rem; padding-right: 0.75rem; }
+  }
+  .contact-hero { margin-bottom: 1.25rem; }
+  .contact-hero h1 {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+    color: #062841;
+    text-align: center;
+  }
+  .contact-hero .divider {
+    width: 70px;
+    height: 3px;
+    margin: 14px auto 0;
+    background: #bc9167;
+    border-radius: 2px;
+  }
+  .contact-hero p {
+    margin: 1rem auto 0;
+    max-width: 72ch;
+    line-height: 1.85;
+    color: rgba(6,40,65,0.78);
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  .contact-frame-shell {
+    width: 100%;
+    height: 960px;
+    min-height: 960px;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(6,40,65,0.12);
+    box-shadow: 0 18px 40px rgba(6,40,65,0.12);
+  }
+
+  .intake-fallback {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+    padding: 1rem 1.1rem;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.92);
+    border: 1px solid rgba(188,145,103,0.28);
+  }
+
+  .intake-fallback p {
+    margin: 0;
+    color: rgba(6,40,65,0.78);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .intake-fallback a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.72rem 1rem;
+    border-radius: 999px;
+    background: #062841;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .intake-fallback a:hover {
+    background: #bc9167;
+    color: #ffffff;
+  }
+
+  .privacy-note {
+    margin-top: 1rem;
+    padding: 0.95rem 1rem;
+    border-left: 3px solid #bc9167;
+    background: rgba(255,255,255,0.78);
+    color: rgba(6,40,65,0.78);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .privacy-note a {
+    color: #062841;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Right panel readability on dark luxury-card */
+  .contact-panel { height: 100%; }
+  .contact-panel h5 { color: #bc9167; letter-spacing: 0.2px; }
+  .contact-panel p,
+  .contact-panel li { color: rgba(230,237,243,0.90); line-height: 1.8; }
+  .contact-panel a { color: #ffffff; text-decoration: none; }
+  .contact-panel a:hover { text-decoration: underline; }
+
+  .contact-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(188,145,103,0.55);
+    background: rgba(188,145,103,0.14);
+    color: rgba(230,237,243,0.95);
+    font-weight: 700;
+    margin-top: 8px;
+  }
+
+  .contact-mini {
+    font-size: 0.92rem;
+    color: rgba(230,237,243,0.78);
+  }
+
+  .contact-legal {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(230,237,243,0.78);
+  }
+  .contact-legal a { color: rgba(230,237,243,0.92); }
+
+  @media (max-width: 991px) {
+    .row.g-5 { --bs-gutter-y: 1.5rem; }
+    .contact-hero { margin-bottom: 0.75rem; }
+    .contact-frame-shell {
+      height: 820px;
+      min-height: 820px;
+    }
+  }
+</style>
+
+<section class="container contact-wrap" style="min-height: 80vh; max-width: 1100px;">
+  <div class="row g-4 g-lg-5">
+
+    <div class="col-12">
+      <div class="contact-hero">
+        <h1>Book a Consultation</h1>
+        <div class="divider"></div>
+        <p>
+          Submit an enquiry through our secure intake form. We’ll review your request, conduct conflict checks,
+          and respond with the next steps.
+        </p>
+      </div>
+    </div>
+
+    <!-- Intake Form -->
+    <div class="col-lg-8">
+      <div class="intake-fallback">
+        <p>
+          If the booking form does not appear below, open the secure intake form directly.
+        </p>
+        <a
+          href="https://matter-intake.com.au/create/b494fc9e-b46b-4263-9efa-be9e6c5f8d6d"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open intake form
+        </a>
+      </div>
+
+      <div class="contact-frame-shell">
+        <iframe src="https://matter-intake.com.au/create/b494fc9e-b46b-4263-9efa-be9e6c5f8d6d"
+          style="
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+          "
+          id="matter-intake-iframe"
+          name="matter-intake-iframe"
+          title="Ochir Law – Consultation intake form"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+      <div class="privacy-note">
+        By submitting information through the intake form, you acknowledge that Ochir Law will handle your personal information in accordance with its
+        <a href="{{ url_for('main.collection_statement') }}">Privacy Collection Statement</a>
+        and <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>.
+      </div>
+    </div>
+
+    <!-- Right Side Information Panel -->
+    <div class="col-lg-4">
+      <div class="luxury-card p-4 contact-panel">
+
+        <h5 class="mb-3">Urgent Matters</h5>
+        <p class="contact-mini" style="margin-bottom: 0.85rem;">
+          For time-sensitive matters, contact us directly.
+        </p>
+        <div class="contact-pill">
+          <span aria-hidden="true">✉︎</span>
+          <a href="mailto:m.saruul@ochirlaw.com.au">m.saruul@ochirlaw.com.au</a>
+        </div>
+        <div class="contact-mini" style="margin-top: 10px;">
+          If your matter is urgent, email us directly rather than submitting the general intake form.
+        </div>
+
+        <hr style="margin: 24px 0;">
+
+        <h5 class="mb-3">Booking Conditions</h5>
+        <p class="contact-mini" style="margin-bottom: 0;">
+          Submitting this form does not establish a solicitor–client relationship.
+          All bookings are subject to conflict checks and formal engagement terms.
+          Consultation fees and additional booking conditions may apply.
+        </p>
+
+        <div class="contact-legal">
+          <a href="{{ url_for('main.terms') }}">Terms &amp; Conditions</a>
+          &nbsp;&middot;&nbsp;
+          <a href="{{ url_for('main.collection_statement') }}">Privacy Collection Statement</a>
+          &nbsp;&middot;&nbsp;
+          <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

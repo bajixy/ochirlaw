@@ -1,0 +1,194 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy – Ochir Law{% endblock %}
+
+{% block content %}
+
+<style>
+  .privacy-wrap { padding: clamp(2rem, 4vw, 3.5rem) 0 4rem; }
+  .privacy-wrap h1 {
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    margin-bottom: 0.5rem;
+    color: #062841;
+  }
+  .privacy-divider {
+    width: 70px;
+    height: 3px;
+    background: #bc9167;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+  .privacy-wrap h2 {
+    margin-top: 2.2rem;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 0.4px;
+    color: #062841;
+  }
+  .privacy-wrap p,
+  .privacy-wrap li {
+    line-height: 1.85;
+    color: rgba(6,40,65,0.85);
+    font-size: 1rem;
+  }
+  .privacy-wrap ul,
+  .privacy-wrap ol {
+    margin-top: 0.6rem;
+    padding-left: 1.2rem;
+  }
+  .privacy-meta {
+    font-size: 0.9rem;
+    color: rgba(6,40,65,0.65);
+    margin-top: 2rem;
+  }
+  .privacy-callout {
+    margin: 1.25rem 0 2rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid #bc9167;
+    background: rgba(255,255,255,0.78);
+    color: rgba(6,40,65,0.78);
+  }
+  .privacy-wrap a { color: #062841; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+</style>
+
+<section class="privacy-wrap">
+  <div class="container" style="max-width: 900px;">
+
+    <h1>Privacy Policy</h1>
+    <div class="privacy-divider"></div>
+
+    <p>
+      At Ochir Law, we take privacy seriously. Protecting personal information is not just a legal obligation, it is a core part of how we operate.
+      We go beyond the minimum requirements of the Privacy Act 1988 (Cth) by embedding robust privacy practices into every aspect of our legal services.
+    </p>
+    <p>
+      We have cultivated a privacy-conscious culture within the firm, supported by clear procedures and secure systems for managing personal information.
+      As legal practitioners, we are bound by strict professional duties of confidentiality to our clients and the courts.
+      In many cases, our clients also benefit from legal professional privilege over communications and records connected to our services.
+    </p>
+    <p>
+      This privacy policy outlines how we handle personal information relating to individuals other than employees.
+      Section 12 addresses privacy practices for employees, partners, and contractors.
+    </p>
+
+    <div class="privacy-callout">
+      For information about personal information collected through enquiry and booking intake forms, please also read our
+      <a href="{{ url_for('main.collection_statement') }}">Privacy Collection Statement</a>.
+    </div>
+
+    <h2>1. What is personal information?</h2>
+    <p>
+      ‘Personal information’ is information or opinion (in recorded form or otherwise) about an identified, or reasonably identifiable, individual.
+      This includes your name, your date of birth and your contact details, and may also include information about your dealings with us.
+    </p>
+    <p>
+      ‘Sensitive information’ is a sub-set of personal information and includes information or opinions about your racial or ethnic origin,
+      political opinions, memberships, religious beliefs, sexual orientation, health or criminal record.
+    </p>
+
+    <h2>2. Collection and storage of personal information</h2>
+    <p>
+      Where possible, we collect your personal information directly from you during the course of our business relationship.
+      Where it is not practicable or reasonable to collect your information directly from you, we may collect it from other sources.
+    </p>
+    <p>We usually collect and hold the following kinds of personal information:</p>
+    <ul>
+      <li>Information about people’s dealings with us or our clients;</li>
+      <li>Name, address, job title, professional membership and contact information;</li>
+      <li>If you are a client or potential client, information about your organisation and your role, payment information and information about your legal matters;</li>
+      <li>Interests in areas of legal practice or events; and</li>
+      <li>Information provided by or on behalf of applicants for a role with us.</li>
+    </ul>
+    <p>
+      We only collect, use or disclose sensitive information where reasonably necessary to perform our functions and where you have consented,
+      or where the law allows us to do so without consent.
+    </p>
+
+    <h2>3. Our purposes for handling your personal information</h2>
+    <p>We collect, hold, use or disclose personal information:</p>
+    <ul>
+      <li>To provide our legal services;</li>
+      <li>To provide communications, events or seminars;</li>
+      <li>To engage third party service providers in connection with our services;</li>
+      <li>To manage and improve our services and client relationships;</li>
+      <li>Where required or authorised by law; and</li>
+      <li>Otherwise to run our business.</li>
+    </ul>
+
+    <h2>4. Disclosures</h2>
+    <p>Subject to our professional obligations, we may disclose personal information:</p>
+    <ul>
+      <li>To barristers, experts, valuers and other parties involved in dispute resolution;</li>
+      <li>To service providers, agents and contractors;</li>
+      <li>To professional advisers and insurers;</li>
+      <li>To regulators, government agencies or law enforcement where required; and</li>
+      <li>Where you have provided consent.</li>
+    </ul>
+    <p>
+      We do not routinely disclose personal information overseas, except where specifically appropriate to providing legal services.
+    </p>
+
+    <h2>5. Marketing</h2>
+    <p>
+      Where we have a business relationship with you or you have consented, we may send legal updates or communications.
+      You may opt out at any time by contacting us or using the unsubscribe link in our emails.
+    </p>
+
+    <h2>6. Data quality</h2>
+    <p>
+      We take reasonable steps to ensure the personal information we collect, use and disclose is accurate, complete and up-to-date.
+    </p>
+
+    <h2>7. Data security</h2>
+    <p>
+      We hold personal information in paper-based and electronic files and take stringent measures to protect it from misuse, loss,
+      unauthorised access, modification or disclosure.
+    </p>
+    <p>
+      When no longer required, information is securely destroyed or deleted unless we are legally required to retain it.
+      For matter-related information, this generally occurs seven years after completion.
+    </p>
+
+    <h2>8. Access</h2>
+    <p>
+      You may request access to the personal information we hold about you by contacting us.
+      We may recover reasonable costs associated with providing access.
+    </p>
+
+    <h2>9. Correction</h2>
+    <p>
+      If you believe the information we hold is inaccurate or incomplete, you may request correction.
+      We will respond in accordance with our legal obligations.
+    </p>
+
+    <h2>10. Enquiries and complaints</h2>
+    <p>
+      If you have enquiries or complaints, please contact Munkh-Erdene Saruul on 0456 867 879 or at m.saruul@ochirlaw.com.au.
+    </p>
+    <p>
+      You may also contact the Office of the Australian Information Commissioner on 1300 363 992 or via enquiries@oaic.gov.au.
+    </p>
+
+    <h2>11. Changes to this privacy policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. The current version will always be available on our website.
+    </p>
+
+    <h2>12. Personal information about our people</h2>
+    <p>
+      We collect information relating to employees, partners and contractors as part of recruitment and ongoing engagement processes.
+      This may include sensitive information where necessary and lawful.
+    </p>
+
+    <div class="privacy-meta">
+      Last updated: 10 April 2026
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="{% block html_lang %}en{% endblock %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#092742">
+  <script>document.documentElement.classList.add("js");</script>
+
+  <title>{% block title %}Ochir Law{% endblock %}{% block title_suffix %}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Strategic legal advice for businesses and individuals across Australia, with Mongolia-connected experience.{% endblock %}">
+
+  {% set _page_url = page_url if page_url is defined else '' %}
+  {% if _page_url %}<link rel="canonical" href="{{ _page_url }}">{% endif %}
+
+  <!-- Social sharing previews -->
+  <meta property="og:site_name" content="Ochir Law">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{{ self.title()|striptags }}">
+  <meta property="og:description" content="{{ self.meta_description()|striptags }}">
+  {% if _page_url %}<meta property="og:url" content="{{ _page_url }}">{% endif %}
+  <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='img/og-image.jpg', _external=True) }}{% endblock %}">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+  <!-- Preload the core local brand fonts used above the fold -->
+  <link rel="preload" href="{{ url_for('static', filename='fonts/altone-vf.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ url_for('static', filename='fonts/jtbarnez-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+  <!-- Business details for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Ochir Law",
+    "legalName": "Ochir Law Pty Ltd",
+    "url": "{{ url_for('main.index', _external=True) }}",
+    "logo": "{{ url_for('static', filename='img/logo-main-brown.png', _external=True) }}",
+    "image": "{{ url_for('static', filename='img/og-image.jpg', _external=True) }}",
+    "email": "m.saruul@ochirlaw.com.au",
+    "telephone": "+61456867879",
+    "address": { "@type": "PostalAddress", "addressLocality": "Brisbane", "addressRegion": "QLD", "addressCountry": "AU" },
+    "areaServed": "AU",
+    "knowsLanguage": ["en", "mn"],
+    "sameAs": ["https://www.linkedin.com/in/munkh-erdene-saruul/"]
+  }
+  </script>
+
+  <!-- Bootstrap 5 -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+
+  <style>
+    /* ===== Global Background Pattern ===== */
+    html, body {
+      background-color: #f4f4f4 !important;
+      background-image: url("{{ url_for('static', filename='img/pattern.png') }}");
+      background-repeat: repeat;
+      background-size: 520px 520px;
+      background-attachment: fixed;
+    }
+
+    /* Ensure main content fills page nicely */
+    .page-content {
+      background-color: transparent;
+      min-height: 70vh;
+    }
+
+    /* ===== Premium Navbar Styling ===== */
+    .navbar {
+      background: #092742 !important;
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.25s ease;
+    }
+
+    /* Stronger horizontal framing */
+    .navbar .container {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    .navbar .nav-link {
+      font-weight: 500;
+      color: #ffffff !important;
+      margin-left: 1.2rem;
+      position: relative;
+      transition: all 0.25s ease;
+    }
+
+    .navbar .nav-link:hover {
+      color: #cfe6ff !important;
+    }
+
+    /* subtle underline hover effect */
+    .navbar .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #ffffff;
+      transition: width 0.25s ease;
+    }
+
+    .navbar .nav-link:hover::after,
+    .navbar .nav-link.active::after {
+      width: 100%;
+    }
+
+    /* Logo sizing with breathing space */
+    .navbar-brand {
+      padding: 10px 0; /* ensures space from navbar edges */
+    }
+
+    .logo-img {
+      height: 85px; /* slightly reduced to guarantee spacing */
+      width: auto;
+      display: block;
+      padding: 0px 0; /* internal breathing room */
+    }
+
+    /* Phone number styling */
+    .nav-phone {
+      font-weight: 600;
+      color: #ffffff;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+
+    .nav-phone:hover {
+      background: #ffffff;
+      color: #092742;
+      border-color: #ffffff;
+    }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute; left: 1rem; top: -60px; z-index: 2000;
+      background: #bc9167; color: #fff; padding: 0.6rem 1rem; border-radius: 8px;
+      text-decoration: none; transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 1rem; color: #fff; }
+
+  </style>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<!-- ===== Intro Loader ===== -->
+<div id="intro-loader" class="intro-loader" aria-hidden="true">
+  <div class="intro-inner">
+    <img
+      src="{{ url_for('static', filename='img/logo-main-brown.png') }}"
+      alt="Ochir Law"
+      class="intro-logo"
+    />
+    <div class="intro-line"></div>
+    <div class="intro-sub">Strategic Legal Advice</div>
+  </div>
+</div>
+<noscript>
+  <style>
+    #intro-loader { display: none !important; }
+  </style>
+</noscript>
+
+ <!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" aria-label="Primary">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
+      <img
+        src="{{ url_for('static', filename='img/logo-vertical.png') }}"
+        alt="Ochir Law"
+        class="me-2 logo-img"
+        width="98" height="85"
+      >
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.about' %}active{% endif %}" {% if request.endpoint == 'main.about' %}aria-current="page"{% endif %} href="{{ url_for('main.about') }}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.team' %}active{% endif %}" {% if request.endpoint == 'main.team' %}aria-current="page"{% endif %} href="{{ url_for('main.team') }}">
+            Team
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.practice_areas' %}active{% endif %}" {% if request.endpoint == 'main.practice_areas' %}aria-current="page"{% endif %} href="{{ url_for('main.practice_areas') }}">Practice Areas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.industries' %}active{% endif %}" {% if request.endpoint == 'main.industries' %}aria-current="page"{% endif %} href="{{ url_for('main.industries') }}">Industries</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint in ['main.blog_index', 'main.blog_detail'] %}active{% endif %}" {% if request.endpoint in ['main.blog_index', 'main.blog_detail'] %}aria-current="page"{% endif %} href="{{ url_for('main.blog_index', lang='en') }}">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if request.endpoint == 'main.contact' %}active{% endif %}" {% if request.endpoint == 'main.contact' %}aria-current="page"{% endif %} href="{{ url_for('main.contact') }}">
+            Book Consultation
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- ===== Main Content ===== -->
+  <main id="main-content" class="page-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- ===== Footer ===== -->
+<footer class="py-5 mt-5 border-top">
+  <div class="container text-center">
+    <p class="text-secondary small mb-1">
+      &copy; {{ current_year if current_year is defined else 2026 }} Ochir Law
+    </p>
+
+    <p class="text-secondary small mb-1">
+      Professional Legal Counsel | Corporate &amp; Commercial | Funds | Financial Services | Construction
+    </p>
+
+    <!-- Legal links -->
+    <p class="small mb-0">
+      <a href="{{ url_for('main.terms') }}" class="text-secondary text-decoration-none">
+        Terms & Conditions
+      </a>
+      &nbsp;&middot;&nbsp;
+      <a href="{{ url_for('main.privacy') }}" class="text-secondary text-decoration-none">
+        Privacy Policy
+      </a>
+    </p>
+  </div>
+</footer>
+
+  <!-- Bootstrap JS -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}" defer></script>
+
+<!-- Intro Loader Script -->
+<script>
+  (function () {
+    const loader = document.getElementById("intro-loader");
+    if (!loader) return;
+
+    let seen = null;
+    try { seen = sessionStorage.getItem("ochir_intro_seen"); } catch (e) {}
+    if (seen === "1") {
+      loader.classList.add("is-hidden");
+      return;
+    }
+
+    // Minimum display time for premium feel, but never hold the page
+    // back waiting for slow third-party content (e.g. the booking form).
+    const MIN_TIME = 900;
+    const MAX_TIME = 1800;
+    const start = performance.now();
+    let done = false;
+
+    function hide() {
+      if (done) return;
+      done = true;
+      loader.classList.add("is-hidden");
+      try { sessionStorage.setItem("ochir_intro_seen", "1"); } catch (e) {}
+    }
+
+    function ready() {
+      const elapsed = performance.now() - start;
+      setTimeout(hide, Math.max(0, MIN_TIME - elapsed));
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", ready);
+    } else {
+      ready();
+    }
+    setTimeout(hide, MAX_TIME);
+  })();
+</script>
+<script>
+  (function () {
+    const items = document.querySelectorAll(".fade-up");
+    if (!items.length) return;
+
+    // Reduced motion: show everything immediately
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduceMotion.matches) {
+      items.forEach(el => el.classList.add("is-visible"));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
+
+    items.forEach(el => io.observe(el));
+  })();
+</script>
+
+</body>
+</html>
