@@ -45,6 +45,14 @@
     color: rgba(6,40,65,0.65);
     margin-top: 2rem;
   }
+  .privacy-callout {
+    margin: 1.25rem 0 2rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid #bc9167;
+    background: rgba(255,255,255,0.78);
+    color: rgba(6,40,65,0.78);
+  }
+  .privacy-wrap a { color: #062841; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 
 <section class="privacy-wrap">
@@ -66,6 +74,11 @@
       This privacy policy outlines how we handle personal information relating to individuals other than employees.
       Section 12 addresses privacy practices for employees, partners, and contractors.
     </p>
+
+    <div class="privacy-callout">
+      For information about personal information collected through enquiry and booking intake forms, please also read our
+      <a href="{{ url_for('main.collection_statement') }}">Privacy Collection Statement</a>.
+    </div>
 
     <h2>1. What is personal information?</h2>
     <p>
@@ -172,7 +185,7 @@
     </p>
 
     <div class="privacy-meta">
-      Last updated: 1 March 2026
+      Last updated: 10 April 2026
     </div>
 
   </div>

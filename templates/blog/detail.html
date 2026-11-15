@@ -4,14 +4,26 @@
 {% set title = post.title_mn if is_mn else post.title_en %}
 {% set summary = post.summary_mn if is_mn else post.summary_en %}
 {% set content = post.content_mn if is_mn else post.content_en %}
+{% set plain_description = summary or (content|striptags)[:155] %}
 
 {% block html_lang %}{{ 'mn' if is_mn else 'en' }}{% endblock %}
 {% block title %}{{ title }} – Ochir Law{% endblock %}
-{% block meta_description %}{{ summary or content[:155] }}{% endblock %}
+{% block meta_description %}{{ plain_description }}{% endblock %}
+
 {% block head %}
   <link rel="alternate" hreflang="en" href="{{ url_for('main.blog_detail', lang='en', slug=post.slug, _external=True) }}">
   <link rel="alternate" hreflang="mn" href="{{ url_for('main.blog_detail', lang='mn', slug=post.slug, _external=True) }}">
+
   <style>
+    .blog-article {
+      padding: clamp(2rem, 4vw, 4rem) 0 4rem;
+    }
+
+    .blog-shell {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
     .blog-lang-switch {
       display: inline-flex;
       align-items: center;
@@ -19,14 +31,16 @@
       padding: 0.25rem;
       border: 1px solid rgba(188,145,103,0.28);
       border-radius: 999px;
-      background: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.78);
       backdrop-filter: blur(8px);
+      margin-bottom: 1.5rem;
     }
+
     .blog-lang-switch a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.35rem 0.75rem;
+      padding: 0.42rem 0.82rem;
       border-radius: 999px;
       font-size: 0.74rem;
       line-height: 1;
@@ -34,20 +48,234 @@
       text-transform: uppercase;
       text-decoration: none;
       color: rgba(6,40,65,0.72);
+      font-weight: 800;
     }
+
     .blog-lang-switch a.active {
       background: #bc9167;
-      color: #fff;
+      color: #ffffff;
     }
-    .post-body p, .post-body li { line-height: 1.9; color: rgba(6,40,65,0.88); }
-    .post-body h2, .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; color: #062841; }
-    .post-body img { max-width: 100%; height: auto; border-radius: 0.5rem; margin: 1.25rem 0; }
-    .post-body blockquote { border-left: 3px solid #bc9167; padding-left: 1rem; color: rgba(6,40,65,0.75); }
+
+    .article-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: rgba(6,40,65,0.62);
+      font-weight: 900;
+    }
+
+    .article-kicker .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #bc9167;
+    }
+
+    .article-title {
+      margin: 0;
+      max-width: 920px;
+      color: #062841;
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      line-height: 1.04;
+      letter-spacing: -0.045em;
+      font-weight: 950;
+    }
+
+    .article-summary {
+      margin: 1.15rem 0 0;
+      max-width: 780px;
+      color: rgba(6,40,65,0.70);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+      line-height: 1.75;
+    }
+
+    .article-meta {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      align-items: center;
+      color: rgba(6,40,65,0.58);
+      font-size: 0.92rem;
+    }
+
+    .article-meta strong {
+      color: #062841;
+    }
+
+    .featured-image-wrap {
+      margin: clamp(1.5rem, 3vw, 2.5rem) 0;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(188,145,103,0.18);
+      box-shadow: 0 24px 60px rgba(6,40,65,0.12);
+      background: #ffffff;
+    }
+
+    .featured-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .article-card {
+      background: #ffffff;
+      border: 1px solid rgba(188,145,103,0.18);
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(6,40,65,0.075);
+      padding: clamp(1.35rem, 4vw, 3rem);
+    }
+
+    .magazine-content {
+      max-width: 780px;
+      margin: 0 auto;
+      color: rgba(6,40,65,0.88);
+      font-size: 1.06rem;
+      line-height: 1.9;
+    }
+
+    .magazine-content p {
+      margin: 0 0 1.25rem;
+    }
+
+    .magazine-content h2 {
+      margin: 2.4rem 0 0.9rem;
+      color: #062841;
+      font-size: clamp(1.65rem, 3vw, 2.25rem);
+      line-height: 1.16;
+      letter-spacing: -0.025em;
+      font-weight: 950;
+    }
+
+    .magazine-content h3 {
+      margin: 1.8rem 0 0.75rem;
+      color: #062841;
+      font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .magazine-content a {
+      color: #062841;
+      font-weight: 850;
+      text-decoration: underline;
+      text-decoration-color: #bc9167;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .magazine-content a:hover {
+      color: #bc9167;
+    }
+
+    .magazine-content ul,
+    .magazine-content ol {
+      margin: 0 0 1.35rem;
+      padding-left: 1.35rem;
+    }
+
+    .magazine-content li {
+      margin: 0.45rem 0;
+    }
+
+    .magazine-content blockquote {
+      margin: 2rem 0;
+      padding: 1.25rem 1.45rem;
+      border-left: 4px solid #bc9167;
+      background: linear-gradient(90deg, rgba(188,145,103,0.12), rgba(188,145,103,0.035));
+      border-radius: 0 18px 18px 0;
+      color: rgba(6,40,65,0.86);
+      font-size: clamp(1.12rem, 2vw, 1.32rem);
+      line-height: 1.75;
+      font-weight: 600;
+    }
+
+    .magazine-content figure {
+      margin: 2rem 0;
+    }
+
+    .magazine-content img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(6,40,65,0.12);
+      border: 1px solid rgba(188,145,103,0.14);
+      background: #ffffff;
+    }
+
+    .magazine-content figcaption {
+      margin-top: 0.7rem;
+      text-align: center;
+      color: rgba(6,40,65,0.56);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .magazine-content hr {
+      margin: 2.2rem 0;
+      border: 0;
+      border-top: 1px solid rgba(6,40,65,0.12);
+    }
+
+    .article-disclaimer {
+      max-width: 780px;
+      margin: 2.4rem auto 0;
+      padding-top: 1.3rem;
+      border-top: 1px solid rgba(6,40,65,0.12);
+      color: rgba(6,40,65,0.58);
+      font-size: 0.9rem;
+      line-height: 1.75;
+    }
+
+    .article-footer {
+      max-width: 780px;
+      margin: 1.8rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .article-footer a {
+      color: rgba(6,40,65,0.72);
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .article-footer a:hover {
+      color: #bc9167;
+    }
+
+    .article-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      border-radius: 999px;
+      background: #062841;
+      color: #ffffff !important;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .article-cta:hover {
+      background: #bc9167;
+      color: #ffffff !important;
+    }
+
     .mn-copy,
     html[lang="mn"] .blog-article {
       font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
       letter-spacing: 0;
     }
+
     .mn-copy h1,
     .mn-copy h2,
     .mn-copy h3,
@@ -55,16 +283,30 @@
     html[lang="mn"] .blog-article h2,
     html[lang="mn"] .blog-article h3 {
       font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-      font-weight: 600;
       letter-spacing: -0.01em;
     }
+
+    @media (max-width: 768px) {
+      .article-card {
+        border-radius: 18px;
+      }
+
+      .featured-image-wrap {
+        border-radius: 18px;
+      }
+
+      .magazine-content {
+        font-size: 1rem;
+      }
+    }
   </style>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": {{ title|tojson }},
-    "description": {{ (summary or content[:155])|tojson }},
+    "description": {{ plain_description|tojson }},
     "author": {
       "@type": "Person",
       "name": {{ post.author|tojson }}
@@ -73,53 +315,75 @@
       "@type": "Organization",
       "name": "Ochir Law"
     },
+    {% if post.featured_image %}
+    "image": {{ post.featured_image|tojson }},
+    {% endif %}
     "datePublished": "{{ post.created_at.isoformat() }}",
-    "dateModified": "{{ post.updated_at.isoformat() }}"
+    "dateModified": "{{ (post.updated_at or post.created_at).isoformat() }}"
   }
   </script>
 {% endblock %}
 
 {% block content %}
 
-<article class="my-5 blog-article {{ 'mn-copy' if is_mn else '' }}">
-  <div class="container" style="max-width: 900px;">
-    <div class="mb-4">
+<article class="blog-article {{ 'mn-copy' if is_mn else '' }}">
+  <div class="container blog-shell">
+
+    <div>
       <nav class="blog-lang-switch" aria-label="Article language switcher">
         <a href="{{ url_for('main.blog_detail', lang='en', slug=post.slug) }}" class="{{ 'active' if not is_mn else '' }}">English</a>
         <a href="{{ url_for('main.blog_detail', lang='mn', slug=post.slug) }}" class="{{ 'active' if is_mn else '' }}">Монгол</a>
       </nav>
     </div>
 
-    <p class="small text-uppercase text-secondary mb-2" style="letter-spacing:0.08em;">
-      {{ post.category or ('Нийтлэл' if is_mn else 'Article') }} · {{ post.created_at.strftime('%d %B %Y') }}
-    </p>
+    <header>
+      <div class="article-kicker">
+        <span>{{ post.category or ('Нийтлэл' if is_mn else 'Article') }}</span>
+        <span class="dot"></span>
+        <span>{{ post.created_at.strftime('%d %B %Y') }}</span>
+      </div>
 
-    <h1 class="section-title text-start" style="font-size:clamp(2rem,4vw,3rem);">{{ title }}</h1>
+      <h1 class="article-title">{{ title }}</h1>
 
-    {% if summary %}
-      <p class="lead text-secondary mt-3">{{ summary }}</p>
-    {% endif %}
+      {% if summary %}
+        <p class="article-summary">{{ summary }}</p>
+      {% endif %}
+
+      <div class="article-meta">
+        <span>{{ 'Зохиогч' if is_mn else 'By' }} <strong>{{ post.author }}</strong></span>
+        <span>·</span>
+        <span>{{ 'Ерөнхий мэдээлэл' if is_mn else 'General information' }}</span>
+      </div>
+    </header>
 
     {% if post.featured_image %}
-      <img src="{{ post.featured_image }}" alt="{{ title }}" class="img-fluid rounded mb-4">
+      <div class="featured-image-wrap">
+        <img src="{{ post.featured_image }}" alt="{{ title }}">
+      </div>
     {% endif %}
 
-    <div class="bg-white rounded p-4 p-md-5 shadow-sm post-body" style="border:1px solid rgba(188,145,103,0.18);">
-      {% block post_body %}
-        {{ content | markdown }}
-      {% endblock %}
+    <div class="article-card">
+      <div class="magazine-content">
+        {% block post_body %}
+          {{ content | markdown }}
+        {% endblock %}
+      </div>
 
-      <hr>
-      <p class="small text-secondary mb-0">
+      <p class="article-disclaimer">
         {{ 'Энэ нийтлэл нь ерөнхий мэдээллийн зориулалттай бөгөөд хууль зүйн зөвлөгөө биш юм. Өөрийн нөхцөл байдалд тохирсон зөвлөгөө авахын тулд Ochir Law-тэй холбогдоно уу.' if is_mn else 'This article is for general information only and is not legal advice. Contact Ochir Law for advice tailored to your circumstances.' }}
       </p>
+
+      <div class="article-footer">
+        <a href="{{ url_for('main.blog_index', lang=lang) }}">
+          ← {{ 'Бүх нийтлэл рүү буцах' if is_mn else 'Back to all articles' }}
+        </a>
+
+        <a href="{{ url_for('main.contact') }}" class="article-cta">
+          {{ 'Зөвлөгөө авах' if is_mn else 'Book Consultation' }}
+        </a>
+      </div>
     </div>
 
-    <div class="mt-4">
-      <a href="{{ url_for('main.blog_index', lang=lang) }}" class="text-secondary text-decoration-none">
-        ← {{ 'Бүх нийтлэл рүү буцах' if is_mn else 'Back to all articles' }}
-      </a>
-    </div>
   </div>
 </article>
 

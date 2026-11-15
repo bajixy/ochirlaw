@@ -39,6 +39,7 @@ PAGES = {
     "main.contact": ("contact.html", "contact"),
     "main.terms": ("terms.html", "terms"),
     "main.privacy": ("privacy.html", "privacy"),
+    "main.collection_statement": ("privacy_collection_statement.html", "privacy-collection-statement"),
 }
 
 # Old addresses that should keep working.
@@ -46,6 +47,7 @@ REDIRECTS = {
     "blog": "/blog/en/",
     "privacy-policy": "/privacy/",
     "terms-and-conditions": "/terms/",
+    "collection-statement": "/privacy-collection-statement/",
 }
 
 
