@@ -9,6 +9,8 @@
 {% block html_lang %}{{ 'mn' if is_mn else 'en' }}{% endblock %}
 {% block title %}{{ title }} – Ochir Law{% endblock %}
 {% block meta_description %}{{ plain_description }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{% if post.featured_image %}{{ (post.featured_image if post.featured_image.startswith('http') else 'https://ochirlaw.com.au' ~ post.featured_image) }}{% else %}{{ super() }}{% endif %}{% endblock %}
 
 {% block head %}
   <link rel="alternate" hreflang="en" href="{{ url_for('main.blog_detail', lang='en', slug=post.slug, _external=True) }}">

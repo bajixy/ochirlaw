@@ -3,19 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#092742">
+  <script>document.documentElement.classList.add("js");</script>
 
   <title>{% block title %}Ochir Law{% endblock %}{% block title_suffix %}{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}Strategic legal advice for businesses and individuals across Australia, with Mongolia-connected experience.{% endblock %}">
 
+  {% set _page_url = page_url if page_url is defined else '' %}
+  {% if _page_url %}<link rel="canonical" href="{{ _page_url }}">{% endif %}
+
+  <!-- Social sharing previews -->
+  <meta property="og:site_name" content="Ochir Law">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{{ self.title()|striptags }}">
+  <meta property="og:description" content="{{ self.meta_description()|striptags }}">
+  {% if _page_url %}<meta property="og:url" content="{{ _page_url }}">{% endif %}
+  <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='img/og-image.jpg', _external=True) }}{% endblock %}">
+  <meta property="og:locale" content="en_AU">
+  <meta name="twitter:card" content="summary_large_image">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
 
   <!-- Preload the core local brand fonts used above the fold -->
-  <link rel="preload" href="{{ url_for('static', filename='Altone/ALTONE-VF.TTF') }}" as="font" type="font/ttf" crossorigin>
-  <link rel="preload" href="{{ url_for('static', filename='JTBarnez/JTBARNEZ-LIGHT.TTF') }}" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="{{ url_for('static', filename='fonts/altone-vf.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="{{ url_for('static', filename='fonts/jtbarnez-regular.woff2') }}" as="font" type="font/woff2" crossorigin>
+
+  <!-- Business details for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LegalService",
+    "name": "Ochir Law",
+    "legalName": "Ochir Law Pty Ltd",
+    "url": "{{ url_for('main.index', _external=True) }}",
+    "logo": "{{ url_for('static', filename='img/logo-main-brown.png', _external=True) }}",
+    "image": "{{ url_for('static', filename='img/og-image.jpg', _external=True) }}",
+    "email": "m.saruul@ochirlaw.com.au",
+    "telephone": "+61456867879",
+    "address": { "@type": "PostalAddress", "addressLocality": "Brisbane", "addressRegion": "QLD", "addressCountry": "AU" },
+    "areaServed": "AU",
+    "knowsLanguage": ["en", "mn"],
+    "sameAs": ["https://www.linkedin.com/in/munkh-erdene-saruul/"]
+  }
+  </script>
 
   <!-- Bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}" rel="stylesheet">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
@@ -24,7 +59,7 @@
     /* ===== Global Background Pattern ===== */
     html, body {
       background-color: #f4f4f4 !important;
-      background-image: url("{{ url_for('static', filename='images/Pattern 1x1-01.png') }}");
+      background-image: url("{{ url_for('static', filename='img/pattern.png') }}");
       background-repeat: repeat;
       background-size: 520px 520px;
       background-attachment: fixed;
@@ -108,17 +143,27 @@
       color: #092742;
       border-color: #ffffff;
     }
+
+    /* Skip link for keyboard users */
+    .skip-link {
+      position: absolute; left: 1rem; top: -60px; z-index: 2000;
+      background: #bc9167; color: #fff; padding: 0.6rem 1rem; border-radius: 8px;
+      text-decoration: none; transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 1rem; color: #fff; }
+
   </style>
 
   {% block head %}{% endblock %}
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- ===== Intro Loader ===== -->
 <div id="intro-loader" class="intro-loader" aria-hidden="true">
   <div class="intro-inner">
     <img
-      src="{{ url_for('static', filename='images/OchirLaw_Logo_Main_Brown.png') }}"
+      src="{{ url_for('static', filename='img/logo-main-brown.png') }}"
       alt="Ochir Law"
       class="intro-logo"
     />
@@ -138,9 +183,10 @@
     <!-- Logo + Brand -->
     <a class="navbar-brand d-flex align-items-center" href="{{ url_for('main.index') }}">
       <img
-        src="{{ url_for('static', filename='images/OchirLaw_Logo_Vertical_Navy.png') }}"
+        src="{{ url_for('static', filename='img/logo-vertical.png') }}"
         alt="Ochir Law"
         class="me-2 logo-img"
+        width="98" height="85"
       >
     </a>
 
@@ -207,7 +253,7 @@
 </footer>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}" defer></script>
 
 <!-- Intro Loader Script -->
 <script>
@@ -215,25 +261,38 @@
     const loader = document.getElementById("intro-loader");
     if (!loader) return;
 
-    const seen = sessionStorage.getItem("ochir_intro_seen");
+    let seen = null;
+    try { seen = sessionStorage.getItem("ochir_intro_seen"); } catch (e) {}
     if (seen === "1") {
       loader.classList.add("is-hidden");
       return;
     }
 
-    // Minimum display time for premium feel
+    // Minimum display time for premium feel, but never hold the page
+    // back waiting for slow third-party content (e.g. the booking form).
     const MIN_TIME = 900;
+    const MAX_TIME = 1800;
     const start = performance.now();
+    let done = false;
 
-    window.addEventListener("load", () => {
+    function hide() {
+      if (done) return;
+      done = true;
+      loader.classList.add("is-hidden");
+      try { sessionStorage.setItem("ochir_intro_seen", "1"); } catch (e) {}
+    }
+
+    function ready() {
       const elapsed = performance.now() - start;
-      const remaining = Math.max(0, MIN_TIME - elapsed);
+      setTimeout(hide, Math.max(0, MIN_TIME - elapsed));
+    }
 
-      setTimeout(() => {
-        loader.classList.add("is-hidden");
-        sessionStorage.setItem("ochir_intro_seen", "1");
-      }, remaining);
-    });
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", ready);
+    } else {
+      ready();
+    }
+    setTimeout(hide, MAX_TIME);
   })();
 </script>
 <script>

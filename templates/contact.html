@@ -7,6 +7,9 @@
 <style>
   /* Contact page – scoped styling */
   .contact-wrap { padding: clamp(3.5rem, 6vw, 5rem) 0 4rem; }
+  @media (max-width: 991px) {
+    .contact-wrap { padding-left: 0.75rem; padding-right: 0.75rem; }
+  }
   .contact-hero { margin-bottom: 1.25rem; }
   .contact-hero h1 {
     margin: 0;
@@ -142,7 +145,7 @@
 </style>
 
 <section class="container contact-wrap" style="min-height: 80vh; max-width: 1100px;">
-  <div class="row g-5">
+  <div class="row g-4 g-lg-5">
 
     <div class="col-12">
       <div class="contact-hero">

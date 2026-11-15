@@ -8,7 +8,7 @@
 /* ===== Local Brand Fonts ===== */
 @font-face {
   font-family: "Altone";
-  src: url("/static/Altone/ALTONE-VF.TTF") format("truetype");
+  src: url("/static/fonts/altone-vf.woff2") format("woff2"), url("/static/Altone/ALTONE-VF.TTF") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -16,35 +16,35 @@
 
 @font-face {
   font-family: "JTBarnez";
-  src: url("/static/JTBarnez/JTBARNEZ-LIGHT.TTF") format("truetype");
+  src: url("/static/fonts/jtbarnez-light.woff2") format("woff2"), url("/static/JTBarnez/JTBARNEZ-LIGHT.TTF") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "JTBarnez";
-  src: url("/static/JTBarnez/JTBARNEZ-REGULAR.TTF") format("truetype");
+  src: url("/static/fonts/jtbarnez-regular.woff2") format("woff2"), url("/static/JTBarnez/JTBARNEZ-REGULAR.TTF") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "JTBarnez";
-  src: url("/static/JTBarnez/JTBARNEZ-MEDIUM.TTF") format("truetype");
+  src: url("/static/fonts/jtbarnez-medium.woff2") format("woff2"), url("/static/JTBarnez/JTBARNEZ-MEDIUM.TTF") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "JTBarnez";
-  src: url("/static/JTBarnez/JTBARNEZ-SEMIBOLD.TTF") format("truetype");
+  src: url("/static/fonts/jtbarnez-semibold.woff2") format("woff2"), url("/static/JTBarnez/JTBARNEZ-SEMIBOLD.TTF") format("truetype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "JTBarnez";
-  src: url("/static/JTBarnez/JTBARNEZ-BOLD.TTF") format("truetype");
+  src: url("/static/fonts/jtbarnez-bold.woff2") format("woff2"), url("/static/JTBarnez/JTBARNEZ-BOLD.TTF") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -645,12 +645,12 @@ footer p { margin-bottom: 0.25rem; }
 @keyframes subIn { to { opacity: 1; } }
 
 /* ===== Scroll Reveal ===== */
-.fade-up {
+.js .fade-up {
   opacity: 0;
   transform: translateY(16px);
   will-change: opacity, transform;
 }
-.fade-up.is-visible {
+.js .fade-up.is-visible {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 650ms ease, transform 650ms ease;

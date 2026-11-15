@@ -81,7 +81,12 @@ class Post:
     @property
     def content_mn(self): return self.body.get("mn", "")
     @property
-    def featured_image(self): return self.image
+    def featured_image(self):
+        """Cover image as a site path, so it works on the list page too."""
+        img = self.image
+        if not img or img.startswith(("/", "http://", "https://")):
+            return img
+        return f"/blog/en/{self.slug}/{img}"
     @property
     def created_at(self): return self.date
     @property
@@ -193,9 +198,10 @@ def build():
     md = markdown.Markdown(extensions=["extra", "sane_lists"])
     env.filters["markdown"] = lambda text: Markup(md.reset().convert(text or ""))
 
-    def render(template, endpoint, **ctx):
+    def render(template, endpoint, path=None, **ctx):
+        page_url = SITE_URL + path if path is not None else ""
         return env.get_template(template).render(
-            url_for=make_url_for(endpoint), request=FakeRequest(endpoint), **ctx
+            url_for=make_url_for(endpoint), request=FakeRequest(endpoint), page_url=page_url, **ctx
         )
 
     if OUT.exists():
@@ -206,17 +212,17 @@ def build():
     urls = []
 
     for endpoint, (template, out) in PAGES.items():
-        write(out, render(template, endpoint))
+        write(out, render(template, endpoint, path=f"/{out}/" if out else "/"))
         urls.append(f"/{out}/" if out else "/")
 
     posts = load_posts()
     for lang in LANGS:
-        write(f"blog/{lang}", render("blog/index.html", "main.blog_index", posts=posts, lang=lang))
+        write(f"blog/{lang}", render("blog/index.html", "main.blog_index", path=f"/blog/{lang}/", posts=posts, lang=lang))
         urls.append(f"/blog/{lang}/")
         for post in posts:
             out = f"blog/{lang}/{post.slug}"
             alt = "mn" if lang == "en" else "en"
-            write(out, render(post.layout, "main.blog_detail", post=post, lang=lang, alternate_lang=alt))
+            write(out, render(post.layout, "main.blog_detail", path=f"/{out}/", post=post, lang=lang, alternate_lang=alt))
             urls.append(f"/{out}/")
 
     # Copy each post's images next to it, so en.md can use ![](photo.jpg)

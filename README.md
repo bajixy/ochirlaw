@@ -44,13 +44,23 @@ python build.py --serve
 
 Then open http://localhost:8000.
 
-## Hosting (Cloudflare Pages / AWS Amplify / Netlify)
+## Hosting (Vercel)
 
-Connect this GitHub repo and use:
+The site is hosted on Vercel, which reads `vercel.json` in this repo:
 
-- Build command: `pip install -r requirements.txt && python build.py`
+- Build command: `python3 build.py` (dependencies from `requirements.txt`)
 - Output directory: `dist`
-- Python version: 3.12 (set in `.python-version`)
+- Old addresses (`/blog`, `/privacy-policy`, `/terms-and-conditions`, `/collection-statement`, `/admin/...`)
+  redirect permanently to their current pages.
+
+Every commit to `main` deploys automatically. Other branches get their own preview link.
 
 If the live domain isn't `https://ochirlaw.com.au`, change `SITE_URL` at the top of `build.py`
-(it's used for the sitemap and links shared on social media).
+(it's used for the sitemap, canonical links and social media previews).
+
+## Where things are
+
+- Fonts: `static/fonts/` (compressed WOFF2; the original TTFs stay as a fallback)
+- Optimised logo, background pattern and photos used by the pages: `static/img/`
+- Original full-size brand files: `static/images/`
+- Bootstrap is served from `static/vendor/` instead of an outside CDN
